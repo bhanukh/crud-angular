@@ -1,0 +1,14 @@
+div{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+h1{
+    margin: 3rem;
+}
+div input{
+    width:30%
+}
+a{
+    text-decoration: none;
+}

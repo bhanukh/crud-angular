@@ -1,0 +1,12 @@
+<div>
+    <h1>Log In </h1>
+    <form #form="ngForm" (ngSubmit)="getData(form.value)">
+         <input type="email" ngModel placeholder="Enter email" name="email"><br><br>
+         <input type="password" ngModel placeholder="Enter password" name="pass" ><br><br>
+         <button type="submit">LogIn</button>
+    </form>
+    <br>
+    <p>forget password <button>Reset</button></p>
+    <br>
+    <button ><a routerLink="">Sign Up</a></button>
+</div>
