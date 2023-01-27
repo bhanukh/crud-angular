@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "crud-app-2f179": {
+      "hosting": {
+        "crudapp": [
+          "crud-app-2f179"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "crud-app-2f179"
+  }
+}
