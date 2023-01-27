@@ -6,4 +6,5 @@ export const environment = {
     apiKey: 'AIzaSyDmBJibWe-A-LKmN8F1hJ26nGSKgtLPV70',
     authDomain: 'crud-app-2f179.firebaseapp.com',
     messagingSenderId: '727840650128',
-  },};
+  },
+};
