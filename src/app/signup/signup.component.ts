@@ -7,13 +7,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-    list:any[]=[]
+    data:any[]=[]
     userData:any ={};
     getData(data:NgForm){
          console.log(data)
           this.userData=data
-          this.list.push({data})
-          console.log(this.list)
+          this.data.push({data})
+          console.log(this.data)
           
     }
 }
