@@ -21,9 +21,5 @@ export class AppComponent implements OnInit {
     collectionData(cls).subscribe((d) => {
       console.log(d);
     });
-    this.userData.users().subscribe((data) => {
-      console.log(data);
-      this.users = data;
-    });
   }
 }
