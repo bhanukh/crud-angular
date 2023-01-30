@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "https://console.firebase.google.com/project/crud-app-2f179/database/crud-app-2f179-default-rtdb/data/~2F",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
