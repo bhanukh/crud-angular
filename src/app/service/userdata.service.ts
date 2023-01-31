@@ -29,9 +29,8 @@ export class UserdataService {
   login(email: string, pass: string) {
     return this.fireauth.signInWithEmailAndPassword(email, pass).then(
       (resp) => {
-        console.log(resp);
-
-        localStorage.setItem('token', 'true');
+        localStorage.setItem('token', JSON.stringify(resp.user));
+        console.log(JSON.parse(localStorage.getItem('resp')!));
       },
       (error) => {
         console.log('error', error);
@@ -45,7 +44,7 @@ export class UserdataService {
       .createUserWithEmailAndPassword(user.email, user.pass)
       .then(
         () => {
-          localStorage.setItem('token', 'true');
+          // localStorage.setItem('token', 'true');
           this.router.navigate(['/login']);
         },
         (Error) => {
@@ -70,8 +69,8 @@ export class UserdataService {
 
   //logout
   logout() {
-    this.fireauth.signOut().then(
-      () => {
+    return this.fireauth.signOut().then(
+      (token) => {
         localStorage.removeItem('token');
         this.router.navigate(['/login']);
       },
