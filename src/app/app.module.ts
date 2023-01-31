@@ -16,6 +16,8 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { UserdataService } from './service/userdata.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { LogoutComponent } from './logout/logout.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     SignupComponent,
     LoginComponent,
     ProfileComponent,
+    LogoutComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,27 +24,28 @@ export class SignupComponent {
   //       console.log(this.data)
 
   // }
-  // getData(postData: {
-  //   fname: string;
-  //   lname: string;
-  //   email: string;
-  //   designation: string;
-  //   pass: string;
-  // }) {
-  //   this.http
-  //     .post(
-  //       'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json',
-  //       postData
-  //     )
-  //     .subscribe((res) => {
-  //       console.log(res);
-  //     });
-  // }
+  realReg(postData: {
+    fname: string;
+    lname: string;
+    email: string;
+    designation: string;
+    pass: string;
+  }) {
+    this.http
+      .post(
+        'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json',
+        postData
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 
-  getData(data: any[]) {
-    this._regUser.regUser(data).subscribe((res) => {
-      console.log(res);
-      this.router.navigate(['/login']);
-    });
+  getData(data: any) {
+    this._regUser.register(data);
+    //.subscribe(() => {
+    console.log(data);
+    //     this.router.navigate(['/login']);
+    //   });
   }
 }

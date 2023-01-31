@@ -1,6 +1,6 @@
 <div>
   <h1>Sign Up Form</h1>
-  <form #form="ngForm" (ngSubmit)="getData([])">
+  <form #form="ngForm" (ngSubmit)="getData(form.value)">
     <input ngModel type="text" name="fname" placeholder="fname" />
     <br /><br />
     <input ngModel type="text" name="lname" placeholder="lname" />
@@ -11,7 +11,7 @@
     <br /><br />
     <input ngModel type="password" name="pass" placeholder="password" />
     <br /><br />
-    <button type="submit">Submit</button>
+    <button type="submit" (click)="realReg(form.value)">Submit</button>
   </form>
   <br />
   <button><a routerLink="login">Log In</a></button>

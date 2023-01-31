@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const cls = collection(this.firestore, '1');
-    collectionData(cls).subscribe((d) => {
-      console.log(d);
-    });
+    collectionData(cls).subscribe((d) => {});
   }
 }

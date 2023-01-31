@@ -1,6 +1,6 @@
 <div>
   <h1>Log In</h1>
-  <form #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="log(form.value)">
     <input
       type="email"
       [(ngModel)]="email"
@@ -13,7 +13,7 @@
       placeholder="Enter password"
       name="pass"
     /><br /><br />
-    <button type="submit" (click)="(login)">LogIn</button>
+    <button type="submit">LogIn</button>
   </form>
   <br />
   <p>forget password <button>Reset</button></p>
