@@ -1,5 +1,12 @@
 <div>
   <h1>Profile Page</h1>
+  <div>
+    <ul>
+      <li *ngFor="let user of userData | keyvalue">
+        {{ user.key }} {{ user.value }}
+      </li>
+    </ul>
+  </div>
   <app-logout></app-logout>
-  <app-card></app-card>
+  <!-- <app-card></app-card> -->
 </div>

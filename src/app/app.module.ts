@@ -18,6 +18,7 @@ import { UserdataService } from './service/userdata.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { LogoutComponent } from './logout/logout.component';
 import { CardComponent } from './card/card.component';
+import { AuthService } from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CardComponent } from './card/card.component';
   ],
   providers: [
     UserdataService,
+    AuthService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
   ],
   bootstrap: [AppComponent],

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { UserdataService } from '../service/userdata.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   constructor(
     private _regUser: UserdataService,
+    private auth: AuthService,
     private http: HttpClient,
     private router: Router
   ) {}
@@ -42,7 +44,7 @@ export class SignupComponent {
   }
 
   getData(data: any) {
-    this._regUser.register(data);
+    this.auth.register(data);
     //.subscribe(() => {
     console.log(data);
     //     this.router.navigate(['/login']);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { Token } from '@angular/compiler';
+import { idToken } from '@angular/fire/auth';
 
 export interface UserType {
   id?: string;
@@ -25,34 +25,6 @@ export class UserdataService {
     console.log(this.fireauth);
   }
 
-  //login
-  login(email: string, pass: string) {
-    return this.fireauth.signInWithEmailAndPassword(email, pass).then(
-      (resp) => {
-        localStorage.setItem('token', JSON.stringify(resp.user));
-        console.log(JSON.parse(localStorage.getItem('resp')!));
-      },
-      (error) => {
-        console.log('error', error);
-        this.router.navigate(['/login']);
-      }
-    );
-  }
-  //sign up
-  register(user: UserType) {
-    return this.fireauth
-      .createUserWithEmailAndPassword(user.email, user.pass)
-      .then(
-        () => {
-          // localStorage.setItem('token', 'true');
-          this.router.navigate(['/login']);
-        },
-        (Error) => {
-          console.log('error', Error);
-          this.router.navigate(['/register']);
-        }
-      );
-  }
   //register
   // regUser(data: any) {
   //   return this.http.post(
@@ -64,19 +36,6 @@ export class UserdataService {
   userData() {
     return this.http.get(
       'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json'
-    );
-  }
-
-  //logout
-  logout() {
-    return this.fireauth.signOut().then(
-      (token) => {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
-      },
-      (err) => {
-        alert(err.message);
-      }
     );
   }
 }
