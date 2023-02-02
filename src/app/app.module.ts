@@ -7,7 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './dashbord/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -16,8 +16,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { UserdataService } from './service/userdata.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { LogoutComponent } from './logout/logout.component';
-import { CardComponent } from './card/card.component';
+import { LogoutComponent } from './dashbord/logout/logout.component';
 import { AuthService } from './service/auth.service';
 
 @NgModule({
@@ -27,7 +26,6 @@ import { AuthService } from './service/auth.service';
     LoginComponent,
     ProfileComponent,
     LogoutComponent,
-    CardComponent,
   ],
   imports: [
     BrowserModule,
