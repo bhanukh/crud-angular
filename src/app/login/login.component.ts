@@ -27,7 +27,10 @@ export class LoginComponent implements OnInit {
       alert('enter pass');
       return;
     }
-    this.auth.login(this.email, this.pass);
-    this.router.navigate(['/profile']);
+    this.auth.login(this.email, this.pass).then(() => {
+      localStorage.getItem('user');
+
+      this.router.navigate(['/profile']);
+    });
   }
 }

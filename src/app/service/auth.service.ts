@@ -7,6 +7,7 @@ export interface UserType {
   userName: string;
   email: string;
   designation: string;
+  phone: number;
   pass: string;
 }
 
@@ -22,13 +23,15 @@ export class AuthService {
   login(email: string, pass: string) {
     return this.fireauth.signInWithEmailAndPassword(email, pass).then(
       (response) => {
-        // console.log(response);
-
-        localStorage.setItem(
-          'user',
-          JSON.stringify(response.user?.displayName)
-        );
-        console.log(localStorage.getItem('user'));
+        const respUser = (response.user?.multiFactor as any).user;
+        const user = {
+          name: respUser.displayName,
+          refreshToken: respUser.stsTokenManager.refreshToken,
+          accessToken: respUser.stsTokenManager.accessToken,
+          uid: respUser.uid,
+          email: respUser.email,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
       },
       (error) => {
         console.log('error', error);
@@ -48,8 +51,7 @@ export class AuthService {
               displayName: user.userName,
               photoURL: user.designation,
             });
-            console.log(resp);
-            console.log(resp.user?.displayName);
+            // console.log(resp);
           })
           .catch((error) => {
             console.log('error', error);

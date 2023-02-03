@@ -1,4 +1,4 @@
-export type local = {
+export type UserType = {
   uid: string;
   email: string;
   displayName: string;

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { local } from 'src/app/model/type';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -12,10 +11,22 @@ export class ProfileComponent {
   display: string | undefined;
   constructor(private http: HttpClient) {
     this.data = localStorage.getItem('user');
-    console.log(JSON.parse(this.data));
-
-    console.log(this.data);
+    //console.log(this.data);
+    this.userData = JSON.parse(this.data);
+    console.log(this.userData);
   }
-  ngOnInit() {}
-  getUserData() {}
+
+  ngOnInit() {
+    // this.http.post(
+    //   'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json',
+    //   {
+    //     userName: (String = this.userData[0]),
+    //     email: (String = this.userData[3]),
+    //     uid: (String = this.userData[2]),
+    //     refToken: (String = this.userData[1]),
+    //   }
+    // );
+    // console.log('send');
+  }
+  registerUser() {}
 }
