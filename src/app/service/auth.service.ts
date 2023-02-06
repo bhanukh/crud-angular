@@ -23,15 +23,7 @@ export class AuthService {
   login(email: string, pass: string) {
     return this.fireauth.signInWithEmailAndPassword(email, pass).then(
       (response) => {
-        const respUser = (response.user?.multiFactor as any).user;
-        const user = {
-          name: respUser.displayName,
-          refreshToken: respUser.stsTokenManager.refreshToken,
-          accessToken: respUser.stsTokenManager.accessToken,
-          uid: respUser.uid,
-          email: respUser.email,
-        };
-        localStorage.setItem('user', JSON.stringify(user));
+        console.log(response);
       },
       (error) => {
         console.log('error', error);
@@ -43,20 +35,19 @@ export class AuthService {
   async register(user: UserType) {
     return this.fireauth
       .createUserWithEmailAndPassword(user.email, user.pass)
-      .then((resp) => {
-        this.fireauth
-          .onAuthStateChanged((res) => {
-            if (res) res: this.fireauth.currentUser;
-            res?.updateProfile({
-              displayName: user.userName,
-              photoURL: user.designation,
-            });
-            // console.log(resp);
-          })
-          .catch((error) => {
-            console.log('error', error);
-            this.router.navigate(['/register']);
-          });
+      .then((response) => {
+        const respUser = (response.user?.multiFactor as any).user;
+        const user = {
+          refreshToken: respUser.stsTokenManager.refreshToken,
+          accessToken: respUser.stsTokenManager.accessToken,
+          uid: respUser.uid,
+          email: respUser.email,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+      })
+      .catch((error) => {
+        console.log('error', error);
+        this.router.navigate(['/register']);
       });
   }
 

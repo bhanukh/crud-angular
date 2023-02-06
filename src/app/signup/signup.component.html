@@ -2,12 +2,9 @@
   <div class="form">
     <h1>Sign Up Form</h1>
     <form #form="ngForm" (ngSubmit)="getData(form.value)">
-      <input ngModel type="text" name="userName" placeholder="UserName" />
-      <br /><br />
       <input ngModel type="email" name="email" placeholder="Email" />
       <br /><br />
-      <input ngModel type="text" name="designation" placeholder="Designation" />
-      <br /><br />
+
       <input ngModel type="password" name="pass" placeholder="Password" />
       <br /><br />
       <button type="submit">Submit</button>

@@ -18,6 +18,7 @@ import { UserdataService } from './service/userdata.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { LogoutComponent } from './dashbord/logout/logout.component';
 import { AuthService } from './service/auth.service';
+import { UserDetailsComponent } from './signup/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AuthService } from './service/auth.service';
     LoginComponent,
     ProfileComponent,
     LogoutComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,

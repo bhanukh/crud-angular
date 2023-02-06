@@ -15,7 +15,7 @@ export class SignupComponent {
   getData(data: any) {
     this.auth.register(data).then((resp) => {
       console.log(resp);
-      this.router.navigate(['login']);
+      this.router.navigate(['userReg']);
     });
   }
 }
