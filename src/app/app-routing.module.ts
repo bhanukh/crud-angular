@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './dashbord/profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserDetailsComponent } from './signup/user-details/user-details.component';
+import { UserListComponent } from './dashbord/user-list/user-list.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {
@@ -13,9 +15,11 @@ const routes: Routes = [
   { path: 'userReg', component: UserDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'profile/list', component: UserListComponent },
+
   {
     path: '**',
-    component: SignupComponent,
+    component: ErrorComponent,
   },
 ];
 

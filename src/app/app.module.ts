@@ -19,6 +19,10 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { LogoutComponent } from './dashbord/logout/logout.component';
 import { AuthService } from './service/auth.service';
 import { UserDetailsComponent } from './signup/user-details/user-details.component';
+import { NavbarComponent } from './dashbord/navbar/navbar.component';
+import { UserListComponent } from './dashbord/user-list/user-list.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,9 @@ import { UserDetailsComponent } from './signup/user-details/user-details.compone
     ProfileComponent,
     LogoutComponent,
     UserDetailsComponent,
+    NavbarComponent,
+    UserListComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,7 @@ import { UserDetailsComponent } from './signup/user-details/user-details.compone
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    NoopAnimationsModule,
   ],
   providers: [
     UserdataService,

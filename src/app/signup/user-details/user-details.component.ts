@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/service/userdata.service';
 
 export type userDetails = {
+  userId?: string;
   name: string;
   designation: string;
   email: string;

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { userDetails } from '../signup/user-details/user-details.component';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { deleteUser } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,12 @@ export class UserdataService {
   getData() {
     return this.http.get(
       'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json'
+    );
+  }
+  //delete user
+  deleteUser(uid: string): Observable<string> {
+    return this.http.delete<string>(
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' + uid + '.json'
     );
   }
 }
