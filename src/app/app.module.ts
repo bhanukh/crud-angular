@@ -7,7 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './dashbord/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -16,6 +16,13 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { UserdataService } from './service/userdata.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { LogoutComponent } from './dashbord/logout/logout.component';
+import { AuthService } from './service/auth.service';
+import { UserDetailsComponent } from './signup/user-details/user-details.component';
+import { NavbarComponent } from './dashbord/navbar/navbar.component';
+import { UserListComponent } from './dashbord/user-list/user-list.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +30,11 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     SignupComponent,
     LoginComponent,
     ProfileComponent,
+    LogoutComponent,
+    UserDetailsComponent,
+    NavbarComponent,
+    UserListComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +46,11 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    NoopAnimationsModule,
   ],
   providers: [
     UserdataService,
+    AuthService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
   ],
   bootstrap: [AppComponent],

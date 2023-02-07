@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { UserdataService } from '../service/userdata.service';
+import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,41 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  constructor(
-    private _regUser: UserdataService,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   userData: any = {};
-  // getData(data:NgForm){
-  //      console.log(data)
-  //       this.userData=data
-  //       this.data.push({data})
-  //       console.log(this.data)
 
-  // }
-  // getData(postData: {
-  //   fname: string;
-  //   lname: string;
-  //   email: string;
-  //   designation: string;
-  //   pass: string;
-  // }) {
-  //   this.http
-  //     .post(
-  //       'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json',
-  //       postData
-  //     )
-  //     .subscribe((res) => {
-  //       console.log(res);
-  //     });
-  // }
-
-  getData(data: any[]) {
-    this._regUser.regUser(data).subscribe((res) => {
-      console.log(res);
-      this.router.navigate(['/login']);
+  getData(data: any) {
+    this.auth.register(data).then((resp) => {
+      console.log(resp);
+      this.router.navigate(['userReg']);
     });
   }
 }

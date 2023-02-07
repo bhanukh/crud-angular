@@ -1,0 +1,22 @@
+<div>
+  <div class="form">
+    <h1>Sign Up Form</h1>
+    <form #form="ngForm" (ngSubmit)="registerDetails(form.value)">
+      <input ngModel type="text" name="userName" placeholder="UserName" />
+      <br /><br />
+
+      <input ngModel type="text" name="designation" placeholder="Designation" />
+      <br /><br />
+      <input ngModel type="number" name="number" placeholder="Phone Number" />
+      <br /><br />
+      <select ngModel name="userType" id="userType">
+        <option value="Basic">Basic</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <br />
+    <button><a routerLink="login">Log In</a></button>
+  </div>
+</div>

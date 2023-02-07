@@ -1,65 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
-
-export type UserType = {
-  fname: string;
-  lname: string;
-  email: string;
-  designation: string;
-  pass: string;
-};
+import { userDetails } from '../signup/user-details/user-details.component';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { deleteUser } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserdataService {
-  constructor(
-    private http: HttpClient,
-    private fireauth: AngularFireAuth,
-    private router: Router
-  ) {
-    console.log(this.fireauth);
-  }
+  user: any;
+  userData: any;
+  constructor(private http: HttpClient, private fireauth: AngularFireAuth) {
+    this.user = localStorage.getItem('user');
 
-  //login
-  login(email: string, pass: string) {
-    this.fireauth.signInWithEmailAndPassword(email, pass).then(
-      () => {
-        // localStorage.setItem('token', 'true');
-        this.router.navigate(['/profile']);
-      },
-      (Error) => {
-        console.log('error', Error);
-        this.router.navigate(['/login']);
-      }
-    );
+    this.userData = JSON.parse(this.user);
+    console.log(this.userData);
   }
-  //sign up
-  register(email: string, pass: string) {
-    this.fireauth
-      .createUserWithEmailAndPassword(email, pass)
-      .then(() => console.log('user successfully created'));
-  }
-  //register
-  regUser(data: any) {
+  //post register deails
+  register(data: userDetails) {
     return this.http.post(
       'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json',
       data
     );
   }
 
-  //logout
-  logout() {
-    this.fireauth.signOut().then(
-      () => {
-        // localStorage.removeItem('token');
-        this.router.navigate(['/login']);
-      },
-      (err) => {
-        alert(err.message);
-      }
+  //get user details
+  getData() {
+    return this.http.get(
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json'
+    );
+  }
+  //delete user
+  deleteUser(uid: string): Observable<string> {
+    return this.http.delete<string>(
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' + uid + '.json'
     );
   }
 }
