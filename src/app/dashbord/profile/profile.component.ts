@@ -8,13 +8,13 @@ import { NzCardComponent } from 'ng-zorro-antd/card';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  userData: any = [];
-  data: any = [];
+  userData: any ;
+  data: any ;
 
   constructor(private http: HttpClient, private auth: UserdataService) {
-    this.data = localStorage.getItem('user');
+    this.data = localStorage.getItem('logInUser');
     this.userData = JSON.parse(this.data);
-    console.log(this.userData.uid);
+    console.log(this.userData);
 
     //console.log('uid', JSON.parse(this.data));
   }
