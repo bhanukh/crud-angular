@@ -23,7 +23,7 @@ export class UserListComponent {
       this.auth.deleteUser(userId).subscribe((res) => {
         this.data = this.data.filter((eachData: any) => {
           eachData.userId !== userId;
-          // this.auth.getData();
+          this.auth.getData().subscribe();
         });
 
         console.log('User deleted successfully!');
