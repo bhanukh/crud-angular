@@ -13,9 +13,13 @@ export class SignupComponent {
   userData: any = {};
 
   getData(data: any) {
-    this.auth.register(data).then((resp) => {
-      console.log(resp);
-      this.router.navigate(['userReg']);
-    });
+    this.auth
+      .register(data)
+      .then((resp) => {
+        this.router.navigate(['userReg']);
+      })
+      .catch((Error) => {
+        alert('user already registred');
+      });
   }
 }

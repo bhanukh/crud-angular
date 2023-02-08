@@ -23,6 +23,13 @@ import { NavbarComponent } from './dashbord/navbar/navbar.component';
 import { UserListComponent } from './dashbord/user-list/user-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './error/error.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { bg_BG } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import bg from '@angular/common/locales/bg';
+import { NzCardModule } from 'ng-zorro-antd/card';
+
+registerLocaleData(bg);
 
 @NgModule({
   declarations: [
@@ -47,11 +54,13 @@ import { ErrorComponent } from './error/error.component';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     NoopAnimationsModule,
+    NzCardModule,
   ],
   providers: [
     UserdataService,
     AuthService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    { provide: NZ_I18N, useValue: bg_BG },
   ],
   bootstrap: [AppComponent],
 })
