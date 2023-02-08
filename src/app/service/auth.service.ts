@@ -23,7 +23,14 @@ export class AuthService {
   login(email: string, pass: string) {
     return this.fireauth.signInWithEmailAndPassword(email, pass).then(
       (response) => {
-        console.log(response);
+        const respUser = (response.user?.multiFactor as any).user;
+        const user = {
+          refreshToken: respUser.stsTokenManager.refreshToken,
+          accessToken: respUser.stsTokenManager.accessToken,
+          uid: respUser.uid,
+          email: respUser.email,
+        };
+        localStorage.setItem('logInUser', JSON.stringify(user.uid));
       },
       (error) => {
         console.log('error', error);

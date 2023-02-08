@@ -3,7 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { userDetails } from '../signup/user-details/user-details.component';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { deleteUser } from 'firebase/auth';
+import { map } from 'rxjs';
+import { set, get, ref } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,10 @@ import { deleteUser } from 'firebase/auth';
 export class UserdataService {
   user: any;
   userData: any;
+  userArr: any = [];
   constructor(private http: HttpClient, private fireauth: AngularFireAuth) {
-    this.user = localStorage.getItem('user');
-
-    this.userData = JSON.parse(this.user);
-    console.log(this.userData);
+    // this.user = localStorage.getItem('user');
+    // this.userData = JSON.parse(this.user);
   }
   //post register deails
   register(data: userDetails) {
@@ -27,14 +27,31 @@ export class UserdataService {
 
   //get user details
   getData() {
-    return this.http.get(
-      'https://crud-app-2f179-default-rtdb.firebaseio.com/user.json'
+    return this.http
+      .get<any>('https://crud-app-2f179-default-rtdb.firebaseio.com/user.json')
+      .pipe(
+        map((resData) => {
+          console.log();
+          for (const key in resData) {
+            if (resData.hasOwnProperty(key)) {
+              this.userArr.push({ userId: key, ...resData[key] });
+            }
+          }
+          return this.userArr;
+        })
+      );
+  }
+  loggedInUser(uid: string): Observable<string> {
+    return this.http.get<string>(
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' + uid + '.json'
     );
   }
   //delete user
-  deleteUser(uid: string): Observable<string> {
+  deleteUser(userId: string): Observable<string> {
     return this.http.delete<string>(
-      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' + uid + '.json'
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' +
+        userId +
+        '.json'
     );
   }
 }

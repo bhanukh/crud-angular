@@ -8,21 +8,24 @@ import { UserdataService } from 'src/app/service/userdata.service';
 })
 export class UserListComponent {
   data: any = [];
-  userInfo: any = [];
+  userData: any;
   constructor(private auth: UserdataService) {
-    this.auth.getData().subscribe((res) => {
-      this.data = Object.values(res);
-      console.log(this.data[0].uid);
+    this.auth.getData().subscribe((resData) => {
+      this.data = Object.values(resData);
+      //console.warn(this.data);
+      this.userData = localStorage.getItem('data');
+      // console.warn(this.userData.userId);
     });
   }
 
-  deleteUser(uid: string) {
+  deleteUser(userId: string) {
     if (confirm('do you want to delete user?')) {
-      this.auth.deleteUser(uid).subscribe((res) => {
-        this.data = this.data.filter((uid: string) => {
-          this.data.uid !== uid;
+      this.auth.deleteUser(userId).subscribe((res) => {
+        this.data = this.data.filter((eachData: any) => {
+          eachData.userId !== userId;
+          this.auth.getData();
         });
-        // this.auth.getData().subscribe((res) => console.log(res));
+
         console.log('User deleted successfully!');
       });
     }

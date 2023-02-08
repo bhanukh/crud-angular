@@ -1,12 +1,13 @@
 <app-navbar></app-navbar>
 <div>
-  <h1>Profile Page</h1>
-  <div class="card">
-    <p>Name:<br />{{ this.userData }}</p>
-    <br />
-
-    <br />
-  </div>
+  <nz-card [nzExtra]="extraTemplate">
+    <p>Card content</p>
+    <p>Card content</p>
+    <p>Card content</p>
+  </nz-card>
+  <ng-template #extraTemplate>
+    <a (click)="userProfile(this.userData.uid)">More</a>
+  </ng-template>
 
   <!-- <app-card></app-card> -->
 </div>

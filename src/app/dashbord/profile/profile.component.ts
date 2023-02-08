@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserdataService } from 'src/app/service/userdata.service';
-import { Database } from '@angular/fire/database';
-import { Firestore } from '@angular/fire/firestore';
+import { NzCardComponent } from 'ng-zorro-antd/card';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,19 +9,24 @@ import { Firestore } from '@angular/fire/firestore';
 })
 export class ProfileComponent {
   userData: any = [];
-  data: any;
-  userInfo: any;
-  uid: any;
-  constructor(
-    private http: HttpClient,
-    private auth: UserdataService,
-    private fire: Firestore,
-    private db: Database
-  ) {
-    this.data = localStorage.getItem('data');
+  data: any = [];
+
+  constructor(private http: HttpClient, private auth: UserdataService) {
+    this.data = localStorage.getItem('user');
     this.userData = JSON.parse(this.data);
-    console.log(this.userData);
+    console.log(this.userData.uid);
+
+    //console.log('uid', JSON.parse(this.data));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.auth.loggedInUser(this.uid).subscribe((res) => {
+    //   console.warn(res);
+    // });
+  }
+  userProfile(uid: string) {
+    this.auth.loggedInUser(uid).subscribe((res) => {
+      console.log(uid);
+    });
+  }
 }

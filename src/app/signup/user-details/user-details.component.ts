@@ -22,6 +22,7 @@ export type userDetails = {
 export class UserDetailsComponent {
   data: any[] = [];
   userData: any = {};
+  arr: any;
   constructor(private router: Router, private auth: UserdataService) {
     this.userData = localStorage.getItem('user');
 
