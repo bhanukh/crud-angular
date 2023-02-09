@@ -1,25 +1,57 @@
 <app-navbar></app-navbar>
 <div>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Designation</th>
-
-      <th>PhoneNumber</th>
-      <th>Type</th>
-      <th>Update</th>
-    </tr>
-    <tr *ngFor="let item of data">
-      <td>{{ item.userName }}</td>
-      <td>{{ item.email }}</td>
-      <td>{{ item.designation }}</td>
-      <td>{{ item.number }}</td>
-      <td>{{ item.userType }}</td>
-      <td>
-        <button>Edit</button
-        ><button (click)="deleteUser(item.userId)">Delete</button>
-      </td>
-    </tr>
-  </table>
+  <form #form="ngForm">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>PhoneNumber</th>
+        <th>Type</th>
+        <th>Update</th>
+      </tr>
+      <tr *ngFor="let item of data">
+        <td>
+          <div *ngIf="item.isEdit">
+            <input type="text" [(ngModel)]="item.userName" name="userName" />
+          </div>
+          <div *ngIf="!item.isEdit">
+            {{ item.userName }}
+          </div>
+        </td>
+        <td>{{ item.email }}</td>
+        <td>
+          <div *ngIf="item.isEdit">
+            <input
+              type="text"
+              [(ngModel)]="item.designation"
+              name="designation"
+            />
+          </div>
+          <div *ngIf="!item.isEdit">
+            {{ item.designation }}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="item.isEdit">
+            <input type="text" [(ngModel)]="item.number" name="number" />
+          </div>
+          <div *ngIf="!item.isEdit">
+            {{ item.number }}
+          </div>
+        </td>
+        <td>{{ item.userType }}</td>
+        <td>
+          <div *ngIf="item.isEdit">
+            <button (click)="updateUser(form.value, item)">Save</button>
+            <button (click)="item.isEdit = false">Cancel</button>
+          </div>
+          <div *ngIf="!item.isEdit">
+            <button (click)="editUser(item)">Edit</button>
+            <button (click)="deleteUser(item.userId)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
 </div>

@@ -31,12 +31,20 @@ export class UserdataService {
       .get<any>('https://crud-app-2f179-default-rtdb.firebaseio.com/user.json')
       .pipe(
         map((resData) => {
-          console.log();
-          for (const key in resData) {
-            if (resData.hasOwnProperty(key)) {
-              this.userArr.push({ userId: key, ...resData[key] });
-            }
-          }
+          console.log(resData);
+          this.userArr = Object.entries(resData).map((eachItem: any) => {
+            return {
+              userId: eachItem[0],
+              ...eachItem[1],
+            };
+          });
+          // let retObj = [];
+          // for (const key in resData) {
+          //   if (resData.hasOwnProperty(key)) {
+          //     retObj.push({ userId: key, ...resData[key] });
+          //   }
+          // }
+          // this.userData = retObj;
           return this.userArr;
         })
       );
@@ -44,6 +52,25 @@ export class UserdataService {
   loggedInUser(uid: string): Observable<string> {
     return this.http.get<string>(
       'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' + uid + '.json'
+    );
+  }
+
+  //update user
+  updateInfo(data: userDetails): Observable<string> {
+    console.warn(data.userId);
+    return this.http.patch<string>(
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' +
+        data.userId +
+        '.json',
+      data
+    );
+  }
+  //select user details
+  getSelectedInfo(userId: string): Observable<string> {
+    return this.http.get<string>(
+      'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' +
+        userId +
+        '.json'
     );
   }
   //delete user

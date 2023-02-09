@@ -12,6 +12,7 @@ export type userDetails = {
   type: string;
   acessToken: string;
   uid: string;
+  isEdit: boolean;
 };
 
 @Component({

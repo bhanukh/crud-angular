@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -28,6 +27,7 @@ import { bg_BG } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import bg from '@angular/common/locales/bg';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NgIf } from '@angular/common';
 
 registerLocaleData(bg);
 
@@ -55,6 +55,7 @@ registerLocaleData(bg);
     provideFirestore(() => getFirestore()),
     NoopAnimationsModule,
     NzCardModule,
+    NgIf,
   ],
   providers: [
     UserdataService,

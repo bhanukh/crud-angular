@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserdataService } from '../service/userdata.service';
 import { user } from '@angular/fire/auth';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
   log(data: any) {
     if (this.email == '') {
       alert('enter email');
@@ -31,15 +33,20 @@ export class LoginComponent implements OnInit {
       alert('enter pass');
       return;
     }
-    this.auth.login(this.email, this.pass).then(() => {
-      this.userList.getData().subscribe((res) => {
-        localStorage.setItem('data', JSON.stringify(res));
-        this.userData = localStorage.getItem('user');
-        this.userData = this.userData;
-        console.log(this.userData);
+    this.auth
+      .login(this.email, this.pass)
+      .then((result) => {
+        this.userList.getData().subscribe((res) => {
+          localStorage.setItem('data', JSON.stringify(res));
+          this.userData = localStorage.getItem('logInUser');
+          this.userData = this.userData;
+          console.log(this.userData);
+        });
+        this.router.navigate(['profile']);
+      })
+      .catch((error) => {
+        alert('email password wrong');
+        this.router.navigate(['login']);
       });
-
-      this.router.navigate(['/profile']);
-    });
   }
 }

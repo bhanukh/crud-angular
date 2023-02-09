@@ -21,8 +21,9 @@ export class AuthService {
 
   //login
   login(email: string, pass: string) {
-    return this.fireauth.signInWithEmailAndPassword(email, pass).then(
-      (response) => {
+    return this.fireauth
+      .signInWithEmailAndPassword(email, pass)
+      .then((response) => {
         const respUser = (response.user?.multiFactor as any).user;
         const user = {
           refreshToken: respUser.stsTokenManager.refreshToken,
@@ -31,12 +32,7 @@ export class AuthService {
           email: respUser.email,
         };
         localStorage.setItem('logInUser', JSON.stringify(user.uid));
-      },
-      (error) => {
-        console.log('error', error);
-        this.router.navigate(['/login']);
-      }
-    );
+      });
   }
   //sign up
   async register(user: UserType) {
@@ -51,11 +47,11 @@ export class AuthService {
           email: respUser.email,
         };
         localStorage.setItem('user', JSON.stringify(user));
-      })
-      .catch((error) => {
-        console.log('error', error);
-        this.router.navigate(['/register']);
       });
+    // .catch((error) => {
+    //   console.log('error', error);
+    //   this.router.navigate(['/register']);
+    // });
   }
 
   //logout
@@ -65,10 +61,10 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.clear();
         this.router.navigate(['/login']);
-      },
-      (err) => {
-        alert(err.message);
       }
+      // (err) => {
+      //   alert(err.message);
+      // }
     );
   }
 }
