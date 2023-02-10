@@ -10,14 +10,17 @@ import { UserdataService } from 'src/app/service/userdata.service';
 export class UserListComponent {
   [x: string]: any;
   data: any;
+  user: any;
   userData: any;
+  usertype: any;
+  isEdit: boolean = false;
   constructor(private auth: UserdataService, private router: Router) {
     this.auth.getData().subscribe((resData) => {
-      this.data = Object.values(resData);
-      //console.warn(this.data);
+      this.user = Object.values(resData);
       this.userData = localStorage.getItem('logInUser');
-      // console.warn(this.userData.userId);
-      console.table(this.data);
+
+      this.usertype = localStorage.getItem('userType');
+      console.log('type', this.usertype);
     });
   }
 
@@ -26,9 +29,12 @@ export class UserListComponent {
     // this.userData.forEach((element: { isEdit: boolean }) => {
     //   element.isEdit = false;
     // });
-    this.auth.getSelectedInfo(item.userId).subscribe((res) => {
-      console.log(res);
-    });
+
+    // this.auth.getSelectedInfo(item.userId).subscribe((res) => {
+    //   console.log(res);
+    //});
+    // let rep = this.data.find((u: any) => item.userId === u.userId);
+    // console.log(rep);
   }
   updateUser(data: any, item: any) {
     data = {
@@ -37,13 +43,18 @@ export class UserListComponent {
       email: item.email,
       acessToken: item.accessToken,
       userType: item.userType,
+      userId: item.userId,
     };
     console.warn(item.uid);
-
     this.auth.updateInfo(data).subscribe((res) => {
-      console.log(res);
-      location.reload();
+      console.log('update', res);
+
+      this.auth.getData().subscribe((res) => {
+        this.data = res;
+      });
+      item.isEdit = false;
     });
+    //
   }
 
   deleteUser(userId: string) {
@@ -51,11 +62,11 @@ export class UserListComponent {
       this.auth.deleteUser(userId).subscribe((res) => {
         this.data = this.data.filter((eachData: any) => {
           eachData.userId !== userId;
-          this.auth.getData();
+          this.auth.getData().subscribe((res) => {
+            this.user = res;
+          });
         });
-
         console.log('User deleted successfully!');
-        location.reload();
       });
     }
   }

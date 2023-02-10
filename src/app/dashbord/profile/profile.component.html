@@ -1,13 +1,21 @@
-<app-navbar></app-navbar>
 <div>
-  <nz-card [nzExtra]="extraTemplate">
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
-  </nz-card>
-  <ng-template #extraTemplate>
-    <a (click)="userProfile(this.userData.uid)">More</a>
-  </ng-template>
+  <!-- <button (click)="checkType(this.currentUser.userType)">type check</button> -->
+  <div *ngIf="logInStatus">
+    <app-navbar></app-navbar>
+    <div>
+      <nz-card>
+        <p>Name&nbsp;:&nbsp;{{ this.currentUser.userName }}</p>
+        <p>Email&nbsp;:&nbsp;{{ this.currentUser.email }}</p>
+        <p>Designation&nbsp;:&nbsp;{{ this.currentUser.designation }}</p>
+        <p>Phone&nbsp;:&nbsp;{{ this.currentUser.number }}</p>
+        <p>UserType&nbsp;:&nbsp;{{ this.currentUser.userType }}</p>
+      </nz-card>
 
-  <!-- <app-card></app-card> -->
+      <!-- <app-card></app-card> -->
+    </div>
+  </div>
+  <div *ngIf="!logInStatus">
+    <h1>Please log in first</h1>
+    <button routerLink="/login">Log In</button>
+  </div>
 </div>

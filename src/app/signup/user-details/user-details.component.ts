@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/service/userdata.service';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 
 export type userDetails = {
   userId?: string;
@@ -12,7 +18,6 @@ export type userDetails = {
   type: string;
   acessToken: string;
   uid: string;
-  isEdit: boolean;
 };
 
 @Component({
@@ -20,17 +25,28 @@ export type userDetails = {
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css'],
 })
-export class UserDetailsComponent {
+export class UserDetailsComponent implements OnInit {
+  validateForm!: UntypedFormGroup;
   data: any[] = [];
   userData: any = {};
   arr: any;
-  constructor(private router: Router, private auth: UserdataService) {
+  constructor(
+    private router: Router,
+    private auth: UserdataService,
+    private af: UntypedFormBuilder
+  ) {
     this.userData = localStorage.getItem('user');
 
     this.userData = JSON.parse(this.userData);
     console.log(this.userData);
   }
-
+  ngOnInit(): void {
+    this.validateForm = this.af.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true],
+    });
+  }
   registerDetails(data: userDetails) {
     data = {
       ...data,

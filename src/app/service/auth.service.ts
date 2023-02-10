@@ -16,6 +16,7 @@ export interface UserType {
 })
 export class AuthService {
   res: any;
+  result: any;
 
   constructor(private fireauth: AngularFireAuth, private router: Router) {}
 
@@ -31,7 +32,7 @@ export class AuthService {
           uid: respUser.uid,
           email: respUser.email,
         };
-        localStorage.setItem('logInUser', JSON.stringify(user.uid));
+        localStorage.setItem('logInUser', JSON.stringify(user));
       });
   }
   //sign up
@@ -66,5 +67,16 @@ export class AuthService {
       //   alert(err.message);
       // }
     );
+  }
+
+  isLoggedIn() {
+    this.result = localStorage.getItem('logInUser');
+    const usertoken = JSON.parse(this.result);
+
+    console.log(usertoken);
+    if (usertoken != null) {
+      return true;
+    }
+    return false;
   }
 }

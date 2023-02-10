@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './dashbord/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +28,8 @@ import { registerLocaleData } from '@angular/common';
 import bg from '@angular/common/locales/bg';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NgIf } from '@angular/common';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 registerLocaleData(bg);
 
@@ -55,7 +57,10 @@ registerLocaleData(bg);
     provideFirestore(() => getFirestore()),
     NoopAnimationsModule,
     NzCardModule,
+    NzFormModule,
     NgIf,
+    ReactiveFormsModule,
+    NzInputModule,
   ],
   providers: [
     UserdataService,

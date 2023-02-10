@@ -4,7 +4,6 @@ import { userDetails } from '../signup/user-details/user-details.component';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
-import { set, get, ref } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root',
@@ -38,13 +37,6 @@ export class UserdataService {
               ...eachItem[1],
             };
           });
-          // let retObj = [];
-          // for (const key in resData) {
-          //   if (resData.hasOwnProperty(key)) {
-          //     retObj.push({ userId: key, ...resData[key] });
-          //   }
-          // }
-          // this.userData = retObj;
           return this.userArr;
         })
       );
@@ -58,7 +50,8 @@ export class UserdataService {
   //update user
   updateInfo(data: userDetails): Observable<string> {
     console.warn(data.userId);
-    return this.http.patch<string>(
+
+    return this.http.put<string>(
       'https://crud-app-2f179-default-rtdb.firebaseio.com/user/' +
         data.userId +
         '.json',

@@ -1,3 +1,51 @@
+<!-- <div class="form">
+  <h1>Sign Up Form</h1>
+  <form
+    nz-form
+    [nzLayout]="'inline'"
+    [formGroup]="validateForm"
+    (ngSubmit)="registerDetails(validateForm.value)"
+  >
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <nz-input-group nzPrefixIcon="user">
+          <input formControlName="userName" nz-input placeholder="Username" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your designation!">
+        <nz-input-group nzPrefixIcon="rol">
+          <input
+            formControlName="desi"
+            nz-input
+            type="text"
+            placeholder="Designation"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-control nzErrorTip="Please input your designation!">
+      <nz-input-group nzPrefixIcon="Phone">
+        <input
+          formControlName="phone"
+          nz-input
+          type="text"
+          placeholder="PhoneNumber"
+        />
+      </nz-input-group>
+    </nz-form-control>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">
+          Submit
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div> -->
+
 <div>
   <div class="form">
     <h1>Sign Up Form</h1>
