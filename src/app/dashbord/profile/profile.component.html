@@ -3,14 +3,45 @@
   <div *ngIf="logInStatus">
     <app-navbar></app-navbar>
     <div>
+      <form #form="ngForm" >
       <nz-card>
-        <p>Name&nbsp;:&nbsp;{{ this.currentUser.userName }}</p>
+        <p>Name&nbsp;:&nbsp;<span *ngIf="currentUser.isEdit">
+          <input type="text" [(ngModel)]="currentUser.userName" name="userName" />
+        </span>
+        <span *ngIf="!currentUser.isEdit">
+          {{this.currentUser.userName}}
+        </span>
+      </p>
         <p>Email&nbsp;:&nbsp;{{ this.currentUser.email }}</p>
-        <p>Designation&nbsp;:&nbsp;{{ this.currentUser.designation }}</p>
-        <p>Phone&nbsp;:&nbsp;{{ this.currentUser.number }}</p>
-        <p>UserType&nbsp;:&nbsp;{{ this.currentUser.userType }}</p>
-      </nz-card>
+        <p>Designation&nbsp;:&nbsp;<span *ngIf="currentUser.isEdit">
+          <input type="text" [(ngModel)]="currentUser.designation" name="designation" />
+        </span>
+        <span *ngIf="!currentUser.isEdit">
+          {{this.currentUser.designation}}
+        </span>
+      </p>
+        <p>Phone&nbsp;:&nbsp;<span *ngIf="currentUser.isEdit">
+          <input type="text" [(ngModel)]="currentUser.number" name="number" />
+        </span>
+        <span *ngIf="!currentUser.isEdit">
+          {{this.currentUser.number}}
+        </span>
+      </p>
 
+        
+        <p>UserType&nbsp;:&nbsp;{{ this.currentUser.userType }}</p>
+          
+        <div *ngIf="currentUser.isEdit">
+         
+        <button (click)="updateAdmin(form.value ,currentUser)">Save</button>
+        
+        <button (click)="currentUser.isEdit=false">Cancel</button>
+        </div>
+        <div *ngIf="!currentUser.isEdit">
+        <button (click)="editAdmin(currentUser)">Edit</button>
+        </div>
+      </nz-card>
+    </form>
       <!-- <app-card></app-card> -->
     </div>
   </div>

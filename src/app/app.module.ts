@@ -30,6 +30,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NgIf } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import {ToastrModule} from 'ngx-toastr'
 
 registerLocaleData(bg);
 
@@ -61,6 +62,7 @@ registerLocaleData(bg);
     NgIf,
     ReactiveFormsModule,
     NzInputModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     UserdataService,

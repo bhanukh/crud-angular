@@ -18,9 +18,14 @@ export class UserListComponent {
     this.auth.getData().subscribe((resData) => {
       this.user = Object.values(resData);
       this.userData = localStorage.getItem('logInUser');
-
+       this.userData=(JSON.parse(this.userData));
+      //  console.warn(this.userData.uid)
       this.usertype = localStorage.getItem('userType');
-      console.log('type', this.usertype);
+      // console.log('type', this.usertype);
+
+      let rep = this.user.filter((u: any) =>this.userData.uid  !== u.uid );
+       console.log(rep);
+       this.user=rep;
     });
   }
 

@@ -20,9 +20,7 @@ export class ProfileComponent {
   ) {
     this.data = localStorage.getItem('logInUser');
     this.userData = JSON.parse(this.data);
-    // console.log(this.userData);
-
-    //console.log('uid', JSON.parse(this.data));
+    
     this.logInStatus = this.af.isLoggedIn();
 
     // this.auth.getData().subscribe((res) => {
@@ -41,5 +39,29 @@ export class ProfileComponent {
       console.table(this.currentUser.userName);
       localStorage.setItem('userType', this.currentUser.userType);
     });
+  }
+  editAdmin(currentUser:any){
+    currentUser.isEdit=true
+
+  }
+  updateAdmin(data: any, item: any) {
+    data = {
+      ...data,
+      uid: item.uid,
+      email: item.email,
+      acessToken: item.accessToken,
+      userType: item.userType,
+      userId: item.userId,
+    };
+    // console.warn(item.uid);
+    this.auth.updateInfo(data).subscribe((res) => {
+      // console.log('update', res);
+
+      this.auth.getData().subscribe((res) => {
+        this.data = res;
+      });
+      item.isEdit = false;
+    });
+    
   }
 }
