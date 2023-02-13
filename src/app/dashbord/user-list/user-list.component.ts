@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserdataService } from 'src/app/service/userdata.service';
 
 @Component({
@@ -14,32 +15,29 @@ export class UserListComponent {
   userData: any;
   usertype: any;
   isEdit: boolean = false;
-  constructor(private auth: UserdataService, private router: Router) {
+  constructor(
+    private auth: UserdataService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {
     this.auth.getData().subscribe((resData) => {
       this.user = Object.values(resData);
       this.userData = localStorage.getItem('logInUser');
-       this.userData=(JSON.parse(this.userData));
-      //  console.warn(this.userData.uid)
+      this.userData = JSON.parse(this.userData);
       this.usertype = localStorage.getItem('userType');
-      // console.log('type', this.usertype);
 
-      let rep = this.user.filter((u: any) =>this.userData.uid  !== u.uid );
-       console.log(rep);
-       this.user=rep;
+      let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
+      this.user = rep;
     });
   }
-
+  showSuccess() {
+    this.toaster.success('Selected user deleted successfully', 'Success');
+  }
+  showSuccesEdit() {
+    this.toaster.success('User information updated successfully', 'Success');
+  }
   editUser(item: any) {
     item.isEdit = true;
-    // this.userData.forEach((element: { isEdit: boolean }) => {
-    //   element.isEdit = false;
-    // });
-
-    // this.auth.getSelectedInfo(item.userId).subscribe((res) => {
-    //   console.log(res);
-    //});
-    // let rep = this.data.find((u: any) => item.userId === u.userId);
-    // console.log(rep);
   }
   updateUser(data: any, item: any) {
     data = {
@@ -50,14 +48,12 @@ export class UserListComponent {
       userType: item.userType,
       userId: item.userId,
     };
-    console.warn(item.uid);
     this.auth.updateInfo(data).subscribe((res) => {
-      console.log('update', res);
-
       this.auth.getData().subscribe((res) => {
         this.data = res;
       });
       item.isEdit = false;
+      this.showSuccesEdit();
     });
     //
   }
@@ -71,7 +67,7 @@ export class UserListComponent {
             this.user = res;
           });
         });
-        console.log('User deleted successfully!');
+        this.showSuccess();
       });
     }
   }

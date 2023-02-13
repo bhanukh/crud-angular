@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserdataService } from '../service/userdata.service';
 import { user } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,14 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private http: HttpClient,
     private router: Router,
-    private userList: UserdataService
+    private userList: UserdataService,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {}
+  showError() {
+    this.toaster.error('email password wrong', 'Error');
+  }
 
   log(data: any) {
     if (this.email == '') {
@@ -40,13 +45,12 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('data', JSON.stringify(res));
           this.userData = localStorage.getItem('logInUser');
           this.userData = this.userData;
-          console.log(this.userData);
         });
-        this.router.navigate(['profile']);
+        this.router.navigate(['userReg']);
       })
       .catch((error) => {
-        alert('email password wrong');
-        this.router.navigate(['login']);
+        this.showError();
+        this.router.navigate(['']);
       });
   }
 }

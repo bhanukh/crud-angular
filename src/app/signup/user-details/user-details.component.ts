@@ -7,6 +7,7 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 export type userDetails = {
   userId?: string;
@@ -33,12 +34,12 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: UserdataService,
-    private af: UntypedFormBuilder
+    private af: UntypedFormBuilder,
+    private toaster: ToastrService
   ) {
     this.userData = localStorage.getItem('user');
 
     this.userData = JSON.parse(this.userData);
-    console.log(this.userData);
   }
   ngOnInit(): void {
     this.validateForm = this.af.group({
@@ -54,9 +55,10 @@ export class UserDetailsComponent implements OnInit {
       email: this.userData.email,
       acessToken: this.userData.accessToken,
     };
+    console.log(data);
 
     this.auth.register(data).subscribe((res) => {
-      this.router.navigate(['login']);
+      this.router.navigate(['profile']);
     });
   }
 }

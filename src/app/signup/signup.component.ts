@@ -1,30 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
-  constructor(private auth: AuthService, private router: Router) {}
-
+export class SignupComponent implements OnInit {
+  validateForm!: UntypedFormGroup;
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toaster: ToastrService,
+    private fb: UntypedFormBuilder
+  ) {}
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      email: [null, [Validators.required]],
+      pass: [null, [Validators.required]],
+    });
+  }
   userData: any = {};
-  // resetData(newForm: NgForm) {
-  //   newForm.reset();
-  // }
+  showSuccess() {
+    this.toaster.success('user registred successfullly', 'Succes');
+  }
+  showError() {
+    this.toaster.error('Email already registred', 'Error');
+  }
   getData(data: any) {
     this.auth
       .register(data)
       .then((resp) => {
-        console.log(resp);
-        this.router.navigate(['userReg']);
+        //this.showSuccess();
+        this.router.navigate(['']);
       })
       .catch((error) => {
-        alert('user already registred');
-        this.router.navigate(['']);
+        this.showError();
+        this.router.navigate(['register']);
       });
   }
 }

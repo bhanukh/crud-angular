@@ -22,15 +22,16 @@ import { NavbarComponent } from './dashbord/navbar/navbar.component';
 import { UserListComponent } from './dashbord/user-list/user-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './error/error.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { bg_BG } from 'ng-zorro-antd/i18n';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import bg from '@angular/common/locales/bg';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NgIf } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import {ToastrModule} from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 registerLocaleData(bg);
 
@@ -62,13 +63,21 @@ registerLocaleData(bg);
     NgIf,
     ReactiveFormsModule,
     NzInputModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      timeOut: 3000,
+      progressBar: true,
+      progressAnimation: 'decreasing',
+    }),
+    NzSelectModule,
+    NzButtonModule,
   ],
   providers: [
     UserdataService,
     AuthService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
-    { provide: NZ_I18N, useValue: bg_BG },
+    { provide: NZ_I18N, useValue: en_US },
   ],
   bootstrap: [AppComponent],
 })

@@ -40,6 +40,14 @@ export class AuthService {
     return this.fireauth
       .createUserWithEmailAndPassword(user.email, user.pass)
       .then((response) => {
+        // this.fireauth
+        //   .onAuthStateChanged((response) => {
+        //     if (response) res: this.fireauth.currentUser;
+        //     response?.updateProfile({
+        //       displayName: user.userType,
+
+        //     });
+
         const respUser = (response.user?.multiFactor as any).user;
         const user = {
           refreshToken: respUser.stsTokenManager.refreshToken,
@@ -49,31 +57,20 @@ export class AuthService {
         };
         localStorage.setItem('user', JSON.stringify(user));
       });
-    // .catch((error) => {
-    //   console.log('error', error);
-    //   this.router.navigate(['/register']);
-    // });
   }
 
   //logout
   logout() {
-    return this.fireauth.signOut().then(
-      (user) => {
-        localStorage.removeItem('user');
-        localStorage.clear();
-        this.router.navigate(['/login']);
-      }
-      // (err) => {
-      //   alert(err.message);
-      // }
-    );
+    return this.fireauth.signOut().then((user) => {
+      localStorage.removeItem('user');
+      localStorage.clear();
+      this.router.navigate(['']);
+    });
   }
 
   isLoggedIn() {
     this.result = localStorage.getItem('logInUser');
     const usertoken = JSON.parse(this.result);
-
-    console.log(usertoken);
     if (usertoken != null) {
       return true;
     }
