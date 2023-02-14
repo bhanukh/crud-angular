@@ -1,103 +1,133 @@
 <app-navbar></app-navbar>
-<div>
+<div class="user-table container">
   <div *ngIf="this.usertype === 'Admin'">
     <form #form="ngForm">
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Designation</th>
-          <th>PhoneNumber</th>
-          <th>Type</th>
-          <th>Update</th>
-        </tr>
-        <tr *ngFor="let item of user">
-          <td>
-            <div *ngIf="item.isEdit">
-              <input type="text" [(ngModel)]="item.userName" name="userName" />
-            </div>
-            <div *ngIf="!item.isEdit">
-              {{ item.userName }}
-            </div>
-          </td>
-          <td>{{ item.email }}</td>
-          <td>
-            <div *ngIf="item.isEdit">
-              <input
-                type="text"
-                [(ngModel)]="item.designation"
-                name="designation"
-              />
-            </div>
-            <div *ngIf="!item.isEdit">
-              {{ item.designation }}
-            </div>
-          </td>
-          <td>
-            <div *ngIf="item.isEdit">
-              <input type="text" [(ngModel)]="item.number" name="number" />
-            </div>
-            <div *ngIf="!item.isEdit">
-              {{ item.number }}
-            </div>
-          </td>
-          <td>{{ item.userType }}</td>
-          <td>
-            <div *ngIf="item.isEdit">
-              <button (click)="updateUser(form.value, item)">Save</button>
-              <button (click)="item.isEdit = false">Cancel</button>
-            </div>
-            <div *ngIf="!item.isEdit">
-              <button (click)="editUser(item)">Edit</button>
-              <button (click)="deleteUser(item.userId)">Delete</button>
-            </div>
-          </td>
-        </tr>
+      <table class="table table-hover table-responsive mt-3">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Designation</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Type</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr scope="row" *ngFor="let item of user">
+            <td>
+              <div *ngIf="item.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="item.userName"
+                  name="userName"
+                />
+              </div>
+              <div *ngIf="!item.isEdit">
+                {{ item.userName }}
+              </div>
+            </td>
+            <td>{{ item.email }}</td>
+            <td>
+              <div *ngIf="item.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="item.designation"
+                  name="designation"
+                />
+              </div>
+              <div *ngIf="!item.isEdit">
+                {{ item.designation }}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="item.isEdit">
+                <input type="text" [(ngModel)]="item.number" name="number" />
+              </div>
+              <div *ngIf="!item.isEdit">
+                {{ item.number }}
+              </div>
+            </td>
+            <td>{{ item.userType }}</td>
+            <td>
+              <div *ngIf="item.isEdit">
+                <button
+                  class="btn btn-secondary m-1"
+                  (click)="updateUser(form.value, item)"
+                >
+                  Save
+                </button>
+                <button class="btn btn-info m-1" (click)="item.isEdit = false">
+                  Cancel
+                </button>
+              </div>
+              <div *ngIf="!item.isEdit">
+                <button class="btn btn-secondary m-1" (click)="editUser(item)">
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger m-1"
+                  (click)="deleteUser(item.userId)"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </form>
   </div>
   <div *ngIf="this.usertype === 'Basic'">
     <form #form="ngForm">
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Designation</th>
-          <th>PhoneNumber</th>
-          <th>Type</th>
-        </tr>
-        <tr *ngFor="let item of user">
-          <td>
-            <div *ngIf="item.isEdit">
-              <input type="text" [(ngModel)]="item.userName" name="userName" />
-            </div>
-            <div *ngIf="!item.isEdit">
-              {{ item.userName }}
-            </div>
-          </td>
-          <td>{{ item.email }}</td>
-          <td>
-            <div *ngIf="item.isEdit">
-              <input
-                type="text"
-                [(ngModel)]="item.designation"
-                name="designation"
-              />
-            </div>
-            <div *ngIf="!item.isEdit">
-              {{ item.designation }}
-            </div>
-          </td>
-          <td>
-            <div *ngIf="item.isEdit">
-              <input type="text" [(ngModel)]="item.number" name="number" />
-            </div>
-            <div *ngIf="!item.isEdit">
-              {{ item.number }}
-            </div>
-          </td>
-          <td>{{ item.userType }}</td>
-        </tr>
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Designation</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row" *ngFor="let item of user">
+            <td>
+              <div *ngIf="item.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="item.userName"
+                  name="userName"
+                />
+              </div>
+              <div *ngIf="!item.isEdit">
+                {{ item.userName }}
+              </div>
+            </td>
+            <td>{{ item.email }}</td>
+            <td>
+              <div *ngIf="item.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="item.designation"
+                  name="designation"
+                />
+              </div>
+              <div *ngIf="!item.isEdit">
+                {{ item.designation }}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="item.isEdit">
+                <input type="text" [(ngModel)]="item.number" name="number" />
+              </div>
+              <div *ngIf="!item.isEdit">
+                {{ item.number }}
+              </div>
+            </td>
+            <td>{{ item.userType }}</td>
+          </tr>
+        </tbody>
       </table>
     </form>
   </div>

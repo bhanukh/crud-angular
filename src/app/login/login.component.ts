@@ -44,10 +44,9 @@ export class LoginComponent implements OnInit {
         this.userList.getData().subscribe((res) => {
           localStorage.setItem('data', JSON.stringify(res));
           this.userData = localStorage.getItem('logInUser');
-          this.userData = this.userData;
-          console.warn(result)
+          this.userData = JSON.parse(this.userData);
         });
-        this.router.navigate(['userReg']);
+        this.router.navigate(['user']);
       })
       .catch((error) => {
         this.showError();

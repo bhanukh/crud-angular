@@ -1,63 +1,88 @@
 <div>
-  <div *ngIf="logInStatus">
-    <app-navbar></app-navbar>
-    <div>
-      <form #form="ngForm">
-        <nz-card>
-          <p>
-            Name&nbsp;:&nbsp;<span *ngIf="currentUser.isEdit">
-              <input
-                type="text"
-                [(ngModel)]="currentUser.userName"
-                name="userName"
-              />
-            </span>
-            <span *ngIf="!currentUser.isEdit">
-              {{ this.currentUser.userName }}
-            </span>
-          </p>
-          <p>Email&nbsp;:&nbsp;{{ this.currentUser.email }}</p>
-          <p>
-            Designation&nbsp;:&nbsp;<span *ngIf="currentUser.isEdit">
-              <input
-                type="text"
-                [(ngModel)]="currentUser.designation"
-                name="designation"
-              />
-            </span>
-            <span *ngIf="!currentUser.isEdit">
-              {{ this.currentUser.designation }}
-            </span>
-          </p>
-          <p>
-            Phone&nbsp;:&nbsp;<span *ngIf="currentUser.isEdit">
-              <input
-                type="text"
-                [(ngModel)]="currentUser.number"
-                name="number"
-              />
-            </span>
-            <span *ngIf="!currentUser.isEdit">
-              {{ this.currentUser.number }}
-            </span>
-          </p>
-
-          <p>UserType&nbsp;:&nbsp;{{ this.currentUser.userType }}</p>
-
-          <div *ngIf="currentUser.isEdit">
-            <button (click)="updateAdmin(form.value, currentUser)">Save</button>
-
-            <button (click)="currentUser.isEdit = false">Cancel</button>
-          </div>
-          <div *ngIf="!currentUser.isEdit">
-            <button (click)="editAdmin(currentUser)">Edit</button>
-          </div>
-        </nz-card>
-      </form>
-    </div>
+  <div *ngIf="this.loader" style="height: 100vh">
+    <app-loading-spiner></app-loading-spiner>
   </div>
-  <div *ngIf="!logInStatus">
-    <h1>Please log in first</h1>
-    <button routerLink="/login">Log In</button>
+  <div *ngIf="!this.loader">
+    <div *ngIf="logInStatus">
+      <app-navbar></app-navbar>
+      <div class="d-flex h-100 justify-content-center align-items-center">
+        <form #form="ngForm">
+          <div class="card">
+            <h3>
+              Name:<span *ngIf="currentUser.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="currentUser.userName"
+                  name="userName"
+                />
+              </span>
+              <span *ngIf="!currentUser.isEdit">
+                {{ this.currentUser.userName }}
+              </span>
+            </h3>
+            <h3>
+              Email:
+              <span>{{ this.currentUser.email }}</span>
+            </h3>
+            <h3>
+              Role :<span *ngIf="currentUser.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="currentUser.designation"
+                  name="designation"
+                />
+              </span>
+              <span *ngIf="!currentUser.isEdit">
+                {{ this.currentUser.designation }}
+              </span>
+            </h3>
+            <h3>
+              Phone:<span *ngIf="currentUser.isEdit">
+                <input
+                  type="text"
+                  [(ngModel)]="currentUser.number"
+                  name="number"
+                />
+              </span>
+              <span *ngIf="!currentUser.isEdit">
+                {{ this.currentUser.number }}
+              </span>
+            </h3>
+
+            <h3>
+              UserType: <span>{{ this.currentUser.userType }} </span>
+            </h3>
+
+            <div *ngIf="currentUser.isEdit">
+              <button
+                class="btn btn-primary m-2"
+                (click)="updateAdmin(form.value, currentUser)"
+              >
+                Save
+              </button>
+
+              <button
+                class="btn btn-secondary m-2"
+                (click)="currentUser.isEdit = false"
+              >
+                Cancel
+              </button>
+            </div>
+            <div *ngIf="!currentUser.isEdit">
+              <button
+                class="btn btn-primary m-2"
+                (click)="editAdmin(currentUser)"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="!logInStatus">
+      <h1>Please log in first</h1>
+      <button routerLink="">Log In</button>
+    </div>
   </div>
 </div>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserdataService } from 'src/app/service/userdata.service';
-import { NzCardComponent } from 'ng-zorro-antd/card';
 import { AuthService } from 'src/app/service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -14,6 +13,7 @@ export class ProfileComponent {
   data: any;
   logInStatus: boolean;
   currentUser: any = [];
+  loader = false;
   constructor(
     private http: HttpClient,
     private auth: UserdataService,
@@ -27,13 +27,14 @@ export class ProfileComponent {
   }
 
   ngOnInit() {
+    this.loader = true;
     this.auth.getData().subscribe((res) => {
       this.data = res;
       let rep = this.data.find((u: any) => this.userData.uid === u.uid);
 
       this.currentUser = rep;
-      console.table(this.currentUser.userName);
       localStorage.setItem('userType', this.currentUser.userType);
+      this.loader = false;
     });
   }
   showSuccess() {
@@ -51,10 +52,7 @@ export class ProfileComponent {
       userType: item.userType,
       userId: item.userId,
     };
-    // console.warn(item.uid);
     this.auth.updateInfo(data).subscribe((res) => {
-      // console.log('update', res);
-
       this.auth.getData().subscribe((res) => {
         this.data = res;
       });

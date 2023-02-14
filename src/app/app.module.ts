@@ -17,7 +17,7 @@ import { UserdataService } from './service/userdata.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { LogoutComponent } from './dashbord/logout/logout.component';
 import { AuthService } from './service/auth.service';
-import { UserDetailsComponent } from './signup/user-details/user-details.component';
+import { UserDetailsComponent } from './dashbord/user-details/user-details.component';
 import { NavbarComponent } from './dashbord/navbar/navbar.component';
 import { UserListComponent } from './dashbord/user-list/user-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +32,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { ToastrModule } from 'ngx-toastr';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { LoadingSpinerComponent } from './loading-spiner/loading-spiner.component';
 
 registerLocaleData(bg);
 
@@ -46,6 +47,7 @@ registerLocaleData(bg);
     NavbarComponent,
     UserListComponent,
     ErrorComponent,
+    LoadingSpinerComponent,
   ],
   imports: [
     BrowserModule,

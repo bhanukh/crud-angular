@@ -10,8 +10,8 @@ import { UserdataService } from 'src/app/service/userdata.service';
 })
 export class UserListComponent {
   [x: string]: any;
-  data: any;
-  user: any;
+  data: any = [];
+  user: any = [];
   userData: any;
   usertype: any;
   isEdit: boolean = false;
@@ -67,6 +67,8 @@ export class UserListComponent {
             this.user = res;
           });
         });
+        console.log('deleted');
+
         this.showSuccess();
       });
     }

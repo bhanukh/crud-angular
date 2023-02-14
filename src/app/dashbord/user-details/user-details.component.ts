@@ -31,6 +31,8 @@ export class UserDetailsComponent implements OnInit {
   data: any[] = [];
   userData: any = {};
   arr: any;
+  currentUser: any = [];
+  loader = false;
   constructor(
     private router: Router,
     private auth: UserdataService,
@@ -38,28 +40,27 @@ export class UserDetailsComponent implements OnInit {
     private toaster: ToastrService
   ) {
     this.userData = localStorage.getItem('logInUser');
-
+    this.loader = true;
     this.userData = JSON.parse(this.userData);
-  }
-  ngOnInit(): void {
-    this.validateForm = this.af.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true],
+    this.auth.getData().subscribe((res) => {
+      this.data = res;
+      let rep = this.data.find((u: any) => this.userData.uid === u.uid);
+      this.currentUser = rep;
+      this.loader = false;
     });
   }
+  ngOnInit(): void {}
   registerDetails(data: userDetails) {
     data = {
       ...data,
       uid: this.userData.uid,
       email: this.userData.email,
       acessToken: this.userData.accessToken,
-      userType:this.userData.displayName
+      userType: this.userData.userType,
     };
-    console.log(data);
 
     this.auth.register(data).subscribe((res) => {
-      this.router.navigate(['profile']);
+      this.router.navigate(['/profile']);
     });
   }
 }
