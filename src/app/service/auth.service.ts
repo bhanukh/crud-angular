@@ -9,6 +9,8 @@ export interface UserType {
   designation: string;
   phone: number;
   pass: string;
+  userType:string
+  
 }
 
 @Injectable({
@@ -25,12 +27,14 @@ export class AuthService {
     return this.fireauth
       .signInWithEmailAndPassword(email, pass)
       .then((response) => {
+        console.warn(response)
         const respUser = (response.user?.multiFactor as any).user;
         const user = {
           refreshToken: respUser.stsTokenManager.refreshToken,
           accessToken: respUser.stsTokenManager.accessToken,
           uid: respUser.uid,
           email: respUser.email,
+          userType:respUser.displayName
         };
         localStorage.setItem('logInUser', JSON.stringify(user));
       });
@@ -40,24 +44,25 @@ export class AuthService {
     return this.fireauth
       .createUserWithEmailAndPassword(user.email, user.pass)
       .then((response) => {
-        // this.fireauth
-        //   .onAuthStateChanged((response) => {
-        //     if (response) res: this.fireauth.currentUser;
-        //     response?.updateProfile({
-        //       displayName: user.userType,
+        this.fireauth
+          .onAuthStateChanged((response) => {
+            if (response) res: this.fireauth.currentUser;
+            response?.updateProfile({
+              displayName: user.userType,
 
-        //     });
+            });
 
-        const respUser = (response.user?.multiFactor as any).user;
-        const user = {
-          refreshToken: respUser.stsTokenManager.refreshToken,
-          accessToken: respUser.stsTokenManager.accessToken,
-          uid: respUser.uid,
-          email: respUser.email,
-        };
-        localStorage.setItem('user', JSON.stringify(user));
+        //const respUser = (response.user?.multiFactor as any).user;
+        // const user = {
+        //   refreshToken: respUser.stsTokenManager.refreshToken,
+        //   accessToken: respUser.stsTokenManager.accessToken,
+        //   uid: respUser.uid,
+        //   email: respUser.email,
+        // };
+        // localStorage.setItem('user', JSON.stringify(user));
       });
-  }
+  })
+}
 
   //logout
   logout() {

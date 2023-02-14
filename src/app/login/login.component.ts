@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('data', JSON.stringify(res));
           this.userData = localStorage.getItem('logInUser');
           this.userData = this.userData;
+          console.warn(result)
         });
         this.router.navigate(['userReg']);
       })

@@ -16,7 +16,7 @@ export type userDetails = {
   email: string;
   phone: string;
   pass: string;
-  type: string;
+  userType: string;
   acessToken: string;
   uid: string;
 };
@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
     private af: UntypedFormBuilder,
     private toaster: ToastrService
   ) {
-    this.userData = localStorage.getItem('user');
+    this.userData = localStorage.getItem('logInUser');
 
     this.userData = JSON.parse(this.userData);
   }
@@ -54,6 +54,7 @@ export class UserDetailsComponent implements OnInit {
       uid: this.userData.uid,
       email: this.userData.email,
       acessToken: this.userData.accessToken,
+      userType:this.userData.displayName
     };
     console.log(data);
 
