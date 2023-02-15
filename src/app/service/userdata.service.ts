@@ -21,17 +21,19 @@ export class UserdataService {
 
   //get user details
   getData() {
-    return this.http.get<any>(this.url + '.json').pipe(
-      map((resData) => {
-        this.userArr = Object.entries(resData).map((eachItem: any) => {
-          return {
-            userId: eachItem[0],
-            ...eachItem[1],
-          };
-        });
-        return this.userArr;
-      })
-    );
+    return this.http
+      .get<any>('https://crud-app-2f179-default-rtdb.firebaseio.com/user.json')
+      .pipe(
+        map((resData) => {
+          this.userArr = Object.entries(resData).map((eachItem: any) => {
+            return {
+              userId: eachItem[0],
+              ...eachItem[1],
+            };
+          });
+          return this.userArr;
+        })
+      );
   }
   allData() {
     return this.http.get<any>(this.url + '.json');

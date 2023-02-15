@@ -11,29 +11,43 @@
                   Please enter your email and password!
                 </p>
                 <form #form="ngForm" (ngSubmit)="log(form.value)">
+                  <label class="form-label mt-1" for="typeEmailX">Email</label>
                   <div class="form-outline form-white mb-4">
                     <input
-                      [(ngModel)]="email"
+                      [(ngModel)]="loginSubmit.email"
                       type="email"
                       name="email"
                       id="typeEmailX"
+                      email
+                      required
+                      #email="ngModel"
                       class="form-control form-control-lg"
                     />
-                    <label class="form-label mt-1" for="typeEmailX"
-                      >Email</label
+                    <span *ngIf="email.invalid && email.touched"
+                      >Please enter a valid email.</span
                     >
                   </div>
 
                   <div class="form-outline form-white mb-4">
-                    <input
-                      type="password"
-                      [(ngModel)]="pass"
-                      name="pass"
-                      id="typePasswordX"
-                      class="form-control form-control-lg"
-                    />
                     <label class="form-label mt-1" for="typePasswordX"
                       >Password</label
+                    >
+                    <input
+                      type="password"
+                      [(ngModel)]="loginSubmit.pass"
+                      name="pass"
+                      id="typePasswordX"
+                      required
+                      #pass="ngModel"
+                      minlength="6"
+                      class="form-control form-control-lg"
+                    /><span *ngIf="pass.invalid && pass.touched">
+                      <span *ngIf="pass.errors?.['required']">
+                        Password is required.
+                      </span>
+                      <span *ngIf="pass.errors?.['minlength']">
+                        Password must be at least 6 characters long.
+                      </span></span
                     >
                   </div>
 
@@ -44,6 +58,7 @@
                   <button
                     class="btn btn-outline-light btn-lg px-5"
                     type="submit"
+                    [disabled]="form.invalid"
                   >
                     LogIn
                   </button>

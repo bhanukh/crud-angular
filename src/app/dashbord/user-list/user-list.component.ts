@@ -22,6 +22,7 @@ export class UserListComponent {
   ) {
     this.auth.getData().subscribe((resData) => {
       this.user = Object.values(resData);
+
       this.userData = localStorage.getItem('logInUser');
       this.userData = JSON.parse(this.userData);
       this.usertype = localStorage.getItem('userType');
@@ -61,15 +62,14 @@ export class UserListComponent {
   deleteUser(userId: string) {
     if (confirm('do you want to delete user?')) {
       this.auth.deleteUser(userId).subscribe((res) => {
-        console.warn(res);
         this.data = this.data.filter((eachData: any) => {
           eachData.userId !== userId;
-          console.log('deleted');
-          this.auth.getData().subscribe((resp) => {
-            this.user = res;
-          });
         });
-
+        this.auth.allData().subscribe((resp) => {
+          this.user = Object.values(resp);
+          let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
+          this.user = rep;
+        });
         this.showSuccess();
       });
     }

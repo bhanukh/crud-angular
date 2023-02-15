@@ -11,26 +11,42 @@
               </p>
               <form #form="ngForm" (ngSubmit)="getData(form.value)">
                 <div class="form-outline form-white mb-4">
+                  <label class="form-label mt-1" for="typeEmailX">Email</label>
                   <input
                     ngModel
+                    required
                     type="email"
                     name="email"
+                    email
                     id="typeEmailX"
+                    #email="ngModel"
                     class="form-control form-control-lg"
                   />
-                  <label class="form-label mt-1" for="typeEmailX">Email</label>
+                  <span *ngIf="email.invalid && email.touched"
+                    >Please enter a valid email.</span
+                  >
                 </div>
 
                 <div class="form-outline form-white mb-4">
+                  <label class="form-label mt-1" for="typePasswordX"
+                    >Password</label
+                  >
                   <input
                     type="password"
                     ngModel
+                    required
+                    minlength="6"
                     name="pass"
                     id="typePasswordX"
+                    #password="ngModel"
                     class="form-control form-control-lg"
-                  />
-                  <label class="form-label mt-1" for="typePasswordX"
-                    >Password</label
+                  /><span *ngIf="password.invalid && password.touched">
+                    <span *ngIf="password.errors?.['required']">
+                      Password is required.
+                    </span>
+                    <span *ngIf="password.errors?.['minlength']">
+                      Password must be at least 6 characters long.
+                    </span></span
                   >
                 </div>
                 <div class="form-outline form-white mb-5">
@@ -38,6 +54,7 @@
                     ngModel
                     name="userType"
                     id="userType"
+                    required
                     placeholder="select user type"
                   >
                     <option value="Basic">Basic</option>
@@ -48,7 +65,11 @@
                   >
                 </div>
 
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">
+                <button
+                  class="btn btn-outline-light btn-lg px-5"
+                  type="submit"
+                  [disabled]="form.invalid"
+                >
                   SignIn
                 </button>
               </form>

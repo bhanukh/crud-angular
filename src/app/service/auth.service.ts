@@ -26,7 +26,6 @@ export class AuthService {
     return this.fireauth
       .signInWithEmailAndPassword(email, pass)
       .then((response) => {
-        console.warn(response);
         const respUser = (response.user?.multiFactor as any).user;
         const user = {
           refreshToken: respUser.stsTokenManager.refreshToken,

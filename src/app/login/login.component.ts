@@ -13,9 +13,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  model = {
+    email: null,
+  };
+  loginSubmit = {
+    email: '',
+    pass: '',
+  };
   userData: any;
-  email: string = '';
-  pass: string = '';
+
   constructor(
     private auth: AuthService,
     private http: HttpClient,
@@ -28,18 +34,18 @@ export class LoginComponent implements OnInit {
   showError() {
     this.toaster.error('email password wrong', 'Error');
   }
+  showErrorEmail() {
+    this.toaster.warning('Please enter email password.', 'Warning!');
+  }
 
   log(data: any) {
-    if (this.email == '') {
-      alert('enter email');
+    if (this.loginSubmit.email == '' && this.loginSubmit.pass == '') {
+      this.showErrorEmail();
       return;
     }
-    if (this.pass == '') {
-      alert('enter pass');
-      return;
-    }
+
     this.auth
-      .login(this.email, this.pass)
+      .login(this.loginSubmit.email, this.loginSubmit.pass)
       .then((result) => {
         this.userList.getData().subscribe((res) => {
           localStorage.setItem('data', JSON.stringify(res));

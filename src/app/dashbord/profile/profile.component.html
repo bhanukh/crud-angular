@@ -1,9 +1,18 @@
 <div>
-  <div *ngIf="this.loader" style="height: 100vh">
-    <app-loading-spiner></app-loading-spiner>
+  <div
+    class="d-flex flex-column justify-content-center align-items-center"
+    style="height: 100vh"
+    *ngIf="!logInStatus"
+  >
+    <h1 class="">Please log in first</h1>
+    <br />
+    <button class="btn btn-secondary" routerLink="">Log In</button>
   </div>
-  <div *ngIf="!this.loader">
-    <div *ngIf="logInStatus">
+  <div *ngIf="logInStatus">
+    <div *ngIf="this.loader" style="height: 100vh">
+      <app-loading-spiner></app-loading-spiner>
+    </div>
+    <div *ngIf="!this.loader">
       <app-navbar></app-navbar>
       <div class="d-flex h-100 justify-content-center align-items-center">
         <form #form="ngForm">
@@ -79,10 +88,6 @@
           </div>
         </form>
       </div>
-    </div>
-    <div *ngIf="!logInStatus">
-      <h1>Please log in first</h1>
-      <button routerLink="">Log In</button>
     </div>
   </div>
 </div>
