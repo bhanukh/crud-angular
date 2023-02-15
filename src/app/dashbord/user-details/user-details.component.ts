@@ -33,17 +33,26 @@ export class UserDetailsComponent implements OnInit {
   arr: any;
   currentUser: any = [];
   loader = false;
+  count = [];
+  num: any;
   constructor(
     private router: Router,
     private auth: UserdataService,
     private af: UntypedFormBuilder,
     private toaster: ToastrService
   ) {
+    this.auth.allData().subscribe((res) => {
+      this.count = res;
+      this.num = this.count.length;
+      console.log(this.count);
+    });
     this.userData = localStorage.getItem('logInUser');
     this.loader = true;
     this.userData = JSON.parse(this.userData);
     this.auth.getData().subscribe((res) => {
       this.data = res;
+
+      console.log(this.count);
       let rep = this.data.find((u: any) => this.userData.uid === u.uid);
       this.currentUser = rep;
       this.loader = false;

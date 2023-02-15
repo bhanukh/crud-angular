@@ -33,6 +33,9 @@ export class UserdataService {
       })
     );
   }
+  allData() {
+    return this.http.get<any>(this.url + '.json');
+  }
   loggedInUser(uid: string): Observable<string> {
     return this.http.get<string>(this.url + uid + '.json');
   }

@@ -18,39 +18,54 @@
             <td>
               <div *ngIf="item.isEdit">
                 <input
+                  class="p-3"
                   type="text"
                   [(ngModel)]="item.userName"
                   name="userName"
                 />
               </div>
-              <div *ngIf="!item.isEdit">
+              <div class="p-2" *ngIf="!item.isEdit">
                 {{ item.userName }}
               </div>
             </td>
-            <td>{{ item.email }}</td>
+            <td>
+              <div class="p-2">
+                {{ item.email }}
+              </div>
+            </td>
             <td>
               <div *ngIf="item.isEdit">
                 <input
+                  class="p-2"
                   type="text"
                   [(ngModel)]="item.designation"
                   name="designation"
                 />
               </div>
-              <div *ngIf="!item.isEdit">
+              <div class="p-2" *ngIf="!item.isEdit">
                 {{ item.designation }}
               </div>
             </td>
             <td>
               <div *ngIf="item.isEdit">
-                <input type="text" [(ngModel)]="item.number" name="number" />
+                <input
+                  class="p-2"
+                  type="text"
+                  [(ngModel)]="item.number"
+                  name="number"
+                />
               </div>
-              <div *ngIf="!item.isEdit">
+              <div class="p-2" *ngIf="!item.isEdit">
                 {{ item.number }}
               </div>
             </td>
-            <td>{{ item.userType }}</td>
             <td>
-              <div *ngIf="item.isEdit">
+              <div class="p-2">
+                {{ item.userType }}
+              </div>
+            </td>
+            <td>
+              <div class="p-2" *ngIf="item.isEdit">
                 <button
                   class="btn btn-secondary m-1"
                   (click)="updateUser(form.value, item)"
@@ -80,8 +95,8 @@
   </div>
   <div *ngIf="this.usertype === 'Basic'">
     <form #form="ngForm">
-      <table class="table table-hover">
-        <thead class="thead-dark">
+      <table class="table table-hover table-responsive">
+        <thead class="text-center">
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
@@ -90,7 +105,7 @@
             <th scope="col">Type</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
           <tr scope="row" *ngFor="let item of user">
             <td>
               <div *ngIf="item.isEdit">

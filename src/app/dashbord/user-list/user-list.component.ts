@@ -61,13 +61,14 @@ export class UserListComponent {
   deleteUser(userId: string) {
     if (confirm('do you want to delete user?')) {
       this.auth.deleteUser(userId).subscribe((res) => {
+        console.warn(res);
         this.data = this.data.filter((eachData: any) => {
           eachData.userId !== userId;
-          this.auth.getData().subscribe((res) => {
+          console.log('deleted');
+          this.auth.getData().subscribe((resp) => {
             this.user = res;
           });
         });
-        console.log('deleted');
 
         this.showSuccess();
       });
