@@ -69,7 +69,11 @@ export class AuthService {
       this.router.navigate(['']);
     });
   }
-
+  // reset password
+  resetPassword(email: string) {
+    return this.fireauth.sendPasswordResetEmail(email);
+  }
+  //check user login
   isLoggedIn() {
     this.result = localStorage.getItem('logInUser');
     const usertoken = JSON.parse(this.result);
@@ -78,4 +82,8 @@ export class AuthService {
     }
     return false;
   }
+  //delete user account
+  // deleteAcc(uid: any) {
+  //   return deleteUser(uid);
+  // }
 }

@@ -37,6 +37,28 @@ export class LoginComponent implements OnInit {
   showErrorEmail() {
     this.toaster.warning('Please enter email password.', 'Warning!');
   }
+  showReset() {
+    this.toaster.success(
+      'A password reset link has been sent to your email address.',
+      'Success'
+    );
+  }
+  showResetError() {
+    this.toaster.error('Please enter email password.', 'Error!');
+  }
+  showEmail() {
+    this.toaster.warning('Please enter your email.');
+  }
+
+  resetPass(email: string) {
+    if (!this.loginSubmit.email) {
+      this.showEmail();
+    }
+    this.auth
+      .resetPassword(email)
+      .then(() => this.showReset())
+      .catch((e) => this.showResetError());
+  }
 
   log(data: any) {
     if (this.loginSubmit.email == '' && this.loginSubmit.pass == '') {

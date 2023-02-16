@@ -1,8 +1,10 @@
 <app-navbar></app-navbar>
 <div class="user-table container">
   <div *ngIf="this.usertype === 'Admin'">
-    <form #form="ngForm">
-      <table class="table table-hover table-responsive mt-3">
+    <div *ngIf="!isEdit">
+      <table
+        class="table table-dark table-striped table-hover table-responsive mt-5"
+      >
         <thead class="text-center">
           <tr>
             <th scope="col">Name</th>
@@ -16,67 +18,22 @@
         <tbody class="text-center">
           <tr scope="row" *ngFor="let item of user">
             <td>
-              <div *ngIf="item.isEdit">
-                <input
-                  class="p-3"
-                  type="text"
-                  [(ngModel)]="item.userName"
-                  name="userName"
-                />
-              </div>
-              <div class="p-2" *ngIf="!item.isEdit">
-                {{ item.userName }}
-              </div>
+              {{ item.userName }}
             </td>
             <td>
-              <div class="p-2">
-                {{ item.email }}
-              </div>
+              {{ item.email }}
             </td>
             <td>
-              <div *ngIf="item.isEdit">
-                <input
-                  class="p-2"
-                  type="text"
-                  [(ngModel)]="item.designation"
-                  name="designation"
-                />
-              </div>
-              <div class="p-2" *ngIf="!item.isEdit">
-                {{ item.designation }}
-              </div>
+              {{ item.designation }}
             </td>
             <td>
-              <div *ngIf="item.isEdit">
-                <input
-                  class="p-2"
-                  type="text"
-                  [(ngModel)]="item.number"
-                  name="number"
-                />
-              </div>
-              <div class="p-2" *ngIf="!item.isEdit">
-                {{ item.number }}
-              </div>
+              {{ item.number }}
             </td>
             <td>
-              <div class="p-2">
-                {{ item.userType }}
-              </div>
+              {{ item.userType }}
             </td>
             <td>
-              <div class="p-2" *ngIf="item.isEdit">
-                <button
-                  class="btn btn-secondary m-1"
-                  (click)="updateUser(form.value, item)"
-                >
-                  Save
-                </button>
-                <button class="btn btn-info m-1" (click)="item.isEdit = false">
-                  Cancel
-                </button>
-              </div>
-              <div *ngIf="!item.isEdit">
+              <div>
                 <button class="btn btn-secondary m-1" (click)="editUser(item)">
                   Edit
                 </button>
@@ -91,59 +48,134 @@
           </tr>
         </tbody>
       </table>
-    </form>
-  </div>
-  <div *ngIf="this.usertype === 'Basic'">
-    <form #form="ngForm">
-      <table class="table table-hover table-responsive mt-3">
-        <thead class="text-center">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Designation</th>
-            <th scope="col">PhoneNumber</th>
-            <th scope="col">Type</th>
-          </tr>
-        </thead>
-        <tbody class="text-center">
-          <tr scope="row" *ngFor="let item of user">
-            <td>
-              <div *ngIf="item.isEdit">
-                <input
-                  type="text"
-                  [(ngModel)]="item.userName"
-                  name="userName"
-                />
+    </div>
+    <div *ngIf="isEdit">
+      <div class="form">
+        <div class="vh-60 gradient-custom">
+          <div class="container py-5 h-70">
+            <div
+              class="row d-flex justify-content-center align-items-center h-100"
+            >
+              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div
+                  class="card bg-dark text-white"
+                  style="border-radius: 1rem"
+                >
+                  <div class="card-body p-5 text-center">
+                    <div class="mb-md-5 mt-md-4 pb-5">
+                      <h2 class="fw-bold mb-2 text-uppercase">
+                        Update Details
+                      </h2>
+                      <p class="text-white-50 mb-5">
+                        Please enter your details here!
+                      </p>
+                      <form
+                        #form="ngForm"
+                        (ngSubmit)="updateUser(form.value, user)"
+                      >
+                        <div class="form-outline form-white mb-4">
+                          <label class="form-label mt-1" for="typeEmailX"
+                            >UserName</label
+                          >
+                          <input
+                            [(ngModel)]="updateUserDet.userName"
+                            type="name"
+                            name="userName"
+                            id="typeUserNamerX"
+                            #name="ngModel"
+                            required
+                            class="form-control form-control-lg"
+                          /><span *ngIf="name.invalid && name.touched"
+                            >Please enter your name.</span
+                          >
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                          <label class="form-label mt-1" for="typeDesX"
+                            >Designation</label
+                          >
+                          <input
+                            [(ngModel)]="updateUserDet.designation"
+                            required
+                            type="text"
+                            name="designation"
+                            id="typeDesX"
+                            #role="ngModel"
+                            class="form-control form-control-lg"
+                          /><span *ngIf="role.invalid && role.touched"
+                            >Please enter your degignation.</span
+                          >
+                        </div>
+                        <div class="form-outline form-white mb-4">
+                          <label class="form-label mt-1" for="typeNumX"
+                            >Phone Number</label
+                          >
+                          <input
+                            [(ngModel)]="updateUserDet.number"
+                            name
+                            type="number"
+                            name="number"
+                            id="typeNumX"
+                            #phone="ngModel"
+                            required
+                            pattern="[0-9]{4,12}"
+                            class="form-control form-control-lg"
+                          />
+                          <span *ngIf="phone.invalid && phone.touched"
+                            >Please enter your Phone number.</span
+                          >
+                        </div>
+                        <div>
+                          <button class="btn btn-primary m-2">Save</button>
+
+                          <button
+                            class="btn btn-secondary m-2"
+                            (click)="isEdit = false"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div *ngIf="this.usertype === 'Basic'">
+                    <form #form="ngForm">
+                      <table
+                        class="table table-hover table-dark table-striped table-responsive mt-5"
+                      >
+                        <thead class="text-center">
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">PhoneNumber</th>
+                            <th scope="col">Type</th>
+                          </tr>
+                        </thead>
+                        <tbody class="text-center">
+                          <tr scope="row" *ngFor="let item of user">
+                            <td>
+                              {{ item.userName }}
+                            </td>
+                            <td>{{ item.email }}</td>
+                            <td>
+                              {{ item.designation }}
+                            </td>
+                            <td>
+                              {{ item.number }}
+                            </td>
+                            <td>{{ item.userType }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <div *ngIf="!item.isEdit">
-                {{ item.userName }}
-              </div>
-            </td>
-            <td>{{ item.email }}</td>
-            <td>
-              <div *ngIf="item.isEdit">
-                <input
-                  type="text"
-                  [(ngModel)]="item.designation"
-                  name="designation"
-                />
-              </div>
-              <div *ngIf="!item.isEdit">
-                {{ item.designation }}
-              </div>
-            </td>
-            <td>
-              <div *ngIf="item.isEdit">
-                <input type="text" [(ngModel)]="item.number" name="number" />
-              </div>
-              <div *ngIf="!item.isEdit">
-                {{ item.number }}
-              </div>
-            </td>
-            <td>{{ item.userType }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

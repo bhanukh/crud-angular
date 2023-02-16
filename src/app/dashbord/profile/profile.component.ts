@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserdataService } from 'src/app/service/userdata.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -14,6 +14,7 @@ export class ProfileComponent {
   logInStatus: boolean;
   currentUser: any = [];
   loader = false;
+
   constructor(
     private http: HttpClient,
     private auth: UserdataService,
@@ -25,7 +26,11 @@ export class ProfileComponent {
 
     this.logInStatus = this.af.isLoggedIn();
   }
-
+  updateInfo = {
+    userName: '',
+    designation: '',
+    number: '',
+  };
   ngOnInit() {
     this.loader = true;
     this.auth.getData().subscribe((res) => {
@@ -40,9 +45,14 @@ export class ProfileComponent {
   showSuccess() {
     this.toaster.success('Information updated successfully', 'Success');
   }
+
   editAdmin(currentUser: any) {
     currentUser.isEdit = true;
+    this.updateInfo.userName = this.currentUser.userName;
+    this.updateInfo.designation = this.currentUser.designation;
+    this.updateInfo.number = this.currentUser.number;
   }
+
   updateAdmin(data: any, item: any) {
     data = {
       ...data,
@@ -55,6 +65,8 @@ export class ProfileComponent {
     this.auth.updateInfo(data).subscribe((res) => {
       this.auth.getData().subscribe((res) => {
         this.data = res;
+        let rep = this.data.find((u: any) => this.userData.uid === u.uid);
+        this.currentUser = rep;
       });
       item.isEdit = false;
       this.showSuccess();

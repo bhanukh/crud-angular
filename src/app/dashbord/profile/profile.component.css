@@ -9,3 +9,6 @@ span {
   font-size: 1.6rem;
   padding: 1rem;
 }
+.form {
+  margin-top: -10rem !important;
+}

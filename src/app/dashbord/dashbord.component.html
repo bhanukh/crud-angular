@@ -1,18 +1,18 @@
 <div>
-    <div
-      class="d-flex flex-column justify-content-center align-items-center"
-      style="height: 100vh"
-      *ngIf="!logInStatus"
-    >
-      <h1 class="">Please log in first</h1>
-      <br />
-      <button class="btn btn-secondary" routerLink="">Log In</button>
+  <div
+    class="d-flex flex-column justify-content-center align-items-center"
+    style="height: 100vh"
+    *ngIf="!logInStatus"
+  >
+    <h1 class="">Please log in first</h1>
+    <br />
+    <button class="btn btn-secondary" routerLink="">Log In</button>
+  </div>
+  <div *ngIf="logInStatus">
+    <div *ngIf="!this.currentUser">
+      <app-user-details></app-user-details>
     </div>
-    <div *ngIf="logInStatus">
-      <div *ngIf="!this.currentUser">
-            <app-user-details></app-user-details>
-      </div>
-      <div *ngIf="this.currentUser">
+    <div *ngIf="this.currentUser">
       <div *ngIf="this.loader" style="height: 100vh">
         <app-loading-spiner></app-loading-spiner>
       </div>
@@ -21,4 +21,4 @@
       </div>
     </div>
   </div>
-  </div>
+</div>
