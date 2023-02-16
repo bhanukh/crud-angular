@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           this.userData = localStorage.getItem('logInUser');
           this.userData = JSON.parse(this.userData);
         });
-        this.router.navigate(['user']);
+        this.router.navigate(['dashbord']);
       })
       .catch((error) => {
         this.showError();

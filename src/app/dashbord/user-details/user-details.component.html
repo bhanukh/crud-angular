@@ -1,10 +1,11 @@
 <div>
-  <div *ngIf="this.loader" style="height: 100vh">
+  <!-- <div *ngIf="this.loader" style="height: 100vh">
     <app-loading-spiner></app-loading-spiner>
-  </div>
+  </div> -->
 
-  <div *ngIf="!this.loader">
-    <div *ngIf="!this.currentUser">
+  <!-- <div *ngIf="!this.loader">-->
+    <div *ngIf="!this.currentUser"> 
+      <div>
       <div class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
           <div
@@ -100,7 +101,7 @@
       </div>
     </div>
     <div *ngIf="this.currentUser">
-      <app-profile routerLink="profile"></app-profile>
-    </div>
+      <app-profile></app-profile>
+    </div> -->
   </div>
 </div>

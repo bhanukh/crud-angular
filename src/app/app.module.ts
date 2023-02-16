@@ -33,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { LoadingSpinerComponent } from './loading-spiner/loading-spiner.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
 
 registerLocaleData(bg);
 
@@ -48,6 +49,7 @@ registerLocaleData(bg);
     UserListComponent,
     ErrorComponent,
     LoadingSpinerComponent,
+    DashbordComponent,
   ],
   imports: [
     BrowserModule,

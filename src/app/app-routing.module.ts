@@ -7,6 +7,7 @@ import { UserDetailsComponent } from './dashbord/user-details/user-details.compo
 import { UserListComponent } from './dashbord/user-list/user-list.component';
 import { ErrorComponent } from './error/error.component';
 import { LogoutComponent } from './dashbord/logout/logout.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'list', component: UserListComponent },
   { path: 'logout', component: LogoutComponent },
+  {path:'dashbord', component:DashbordComponent},
 
   {
     path: '**',
