@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
+  isEdit = false;
+
   userData: any;
   data: any;
   logInStatus: boolean;
@@ -25,12 +27,14 @@ export class ProfileComponent {
     this.userData = JSON.parse(this.data);
 
     this.logInStatus = this.af.isLoggedIn();
+    this.updateAdmin.bind(this);
   }
   updateInfo = {
     userName: '',
     designation: '',
     number: '',
   };
+
   ngOnInit() {
     this.loader = true;
     this.auth.getData().subscribe((res) => {
@@ -42,33 +46,48 @@ export class ProfileComponent {
       this.loader = false;
     });
   }
-  showSuccess() {
-    this.toaster.success('Information updated successfully', 'Success');
-  }
 
-  editAdmin(currentUser: any) {
-    currentUser.isEdit = true;
+  showModal(currentUser: any) {
+    this.isEdit = true;
     this.updateInfo.userName = this.currentUser.userName;
     this.updateInfo.designation = this.currentUser.designation;
     this.updateInfo.number = this.currentUser.number;
   }
+  handleOk(): void {
+    console.log('Button ok clicked!');
 
-  updateAdmin(data: any, item: any) {
+    this.isEdit = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isEdit = false;
+  }
+
+  showSuccess() {
+    this.toaster.success('Information updated successfully', 'Success');
+  }
+
+  updateAdmin(data: any) {
+    console.log(this.currentUser.userId);
     data = {
       ...data,
-      uid: item.uid,
-      email: item.email,
-      acessToken: item.accessToken,
-      userType: item.userType,
-      userId: item.userId,
+      uid: this.currentUser.uid,
+      email: this.currentUser.email,
+      acessToken: this.currentUser.accessToken,
+      userType: this.currentUser.userType,
+      userId: this.currentUser.userId,
     };
+    console.log(data);
     this.auth.updateInfo(data).subscribe((res) => {
       this.auth.getData().subscribe((res) => {
+        console.log(res);
         this.data = res;
         let rep = this.data.find((u: any) => this.userData.uid === u.uid);
         this.currentUser = rep;
+        console.log(rep);
+        this.isEdit = false;
       });
-      item.isEdit = false;
       this.showSuccess();
     });
   }

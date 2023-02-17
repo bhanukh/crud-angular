@@ -17,237 +17,65 @@
       <div>
         <div
           class="d-flex h-100 justify-content-center align-items-center"
-          *ngIf="!currentUser.isEdit"
+          *ngIf="!isEdit"
         >
-          <div class="card bg-dark text-white">
-            <h3>
-              Name:
-              <span class="text-capitalize">
-                {{ this.currentUser.userName }}
-              </span>
-            </h3>
-            <h3>
-              Email:
-              <span>{{ this.currentUser.email }}</span>
-            </h3>
-            <h3>
-              Role :
-              <span class="text-capitalize">
-                {{ this.currentUser.designation }}
-              </span>
-            </h3>
-            <h3>
-              Phone:
-              <span>
-                {{ this.currentUser.number }}
-              </span>
-            </h3>
+          <nz-card>
+            <div class="card">
+              <h3>
+                Name:
+                <span class="text-capitalize">
+                  {{ this.currentUser.userName }}
+                </span>
+              </h3>
+              <h3>
+                Email:
+                <span>{{ this.currentUser.email }}</span>
+              </h3>
+              <h3>
+                Role :
+                <span class="text-capitalize">
+                  {{ this.currentUser.designation }}
+                </span>
+              </h3>
+              <h3>
+                Phone:
+                <span>
+                  {{ this.currentUser.number }}
+                </span>
+              </h3>
 
-            <h3>
-              UserType: <span>{{ this.currentUser.userType }} </span>
-            </h3>
-            <div>
-              <button
-                class="btn btn-primary m-2"
-                (click)="editAdmin(currentUser)"
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="currentUser.isEdit">
-          <div class="form">
-            <div class="vh-60 gradient-custom">
-              <div class="container py-5 h-70">
-                <div
-                  class="row d-flex justify-content-center align-items-center h-100"
+              <h3>
+                UserType: <span>{{ this.currentUser.userType }} </span>
+              </h3>
+              <div>
+                <button
+                  nz-button
+                  nzType="primary"
+                  (click)="showModal(currentUser)"
                 >
-                  <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div
-                      class="card bg-dark text-white"
-                      style="border-radius: 1rem"
-                    >
-                      <div class="card-body p-5 text-center">
-                        <div class="mb-md-5 mt-md-4 pb-5">
-                          <h2 class="fw-bold mb-2 text-uppercase">
-                            Update Details
-                          </h2>
-                          <p class="text-white-50 mb-5">
-                            Please enter your details here!
-                          </p>
-                          <form
-                            #form="ngForm"
-                            (ngSubmit)="updateAdmin(form.value, currentUser)"
-                          >
-                            <div class="form-outline form-white mb-4">
-                              <label class="form-label mt-1" for="typeEmailX"
-                                >UserName</label
-                              >
-                              <input
-                                [(ngModel)]="updateInfo.userName"
-                                type="name"
-                                name="userName"
-                                id="typeUserNamerX"
-                                #name="ngModel"
-                                required
-                                class="form-control form-control-lg"
-                              /><span *ngIf="name.invalid && name.touched"
-                                >Please enter your name.</span
-                              >
-                            </div>
-
-                            <div class="form-outline form-white mb-4">
-                              <label class="form-label mt-1" for="typeDesX"
-                                >Designation</label
-                              >
-                              <input
-                                [(ngModel)]="updateInfo.designation"
-                                required
-                                type="text"
-                                name="designation"
-                                id="typeDesX"
-                                #role="ngModel"
-                                class="form-control form-control-lg"
-                              /><span *ngIf="role.invalid && role.touched"
-                                >Please enter your degignation.</span
-                              >
-                            </div>
-                            <div class="form-outline form-white mb-4">
-                              <label class="form-label mt-1" for="typeNumX"
-                                >Phone Number</label
-                              >
-                              <input
-                                [(ngModel)]="updateInfo.number"
-                                name
-                                type="number"
-                                name="number"
-                                id="typeNumX"
-                                #phone="ngModel"
-                                required
-                                pattern="[0-9]{4,12}"
-                                class="form-control form-control-lg"
-                              />
-                              <span *ngIf="phone.invalid && phone.touched"
-                                >Please enter your Phone number.</span
-                              >
-                            </div>
-                            <div>
-                              <button class="btn btn-primary m-2">Save</button>
-
-                              <button
-                                class="btn btn-secondary m-2"
-                                (click)="currentUser.isEdit = false"
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  Edit
+                </button>
               </div>
             </div>
+          </nz-card>
+        </div>
+        <div *ngIf="isEdit">
+          <div class="modal-form">
+            <nz-modal
+              [(nzVisible)]="isEdit"
+              [nzStyle]="{ width: '50%' }"
+              [nzFooter]="null"
+              (nzOnCancel)="handleCancel()"
+            >
+              <ng-container *nzModalContent>
+                <app-user-info-modal
+                  (submitData)="updateAdmin($event)"
+                ></app-user-info-modal>
+              </ng-container>
+            </nz-modal>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!--
-<div>
-  <div
-    class="d-flex flex-column justify-content-center align-items-center"
-    style="height: 100vh"
-    *ngIf="!logInStatus"
-  >
-    <h1 class="">Please log in first</h1>
-    <br />
-    <button class="btn btn-secondary" routerLink="">Log In</button>
-  </div>
-  <div *ngIf="logInStatus">
-    <div *ngIf="this.loader" style="height: 100vh">
-      <app-loading-spiner></app-loading-spiner>
-    </div>
-    <div *ngIf="!this.loader">
-      <app-navbar></app-navbar>
-      <div class="d-flex h-100 justify-content-center align-items-center">
-        <form #form="ngForm">
-          <div class="card">
-            <h3>
-              Name:<span *ngIf="currentUser.isEdit">
-                <input
-                  type="text"
-                  [(ngModel)]="currentUser.userName"
-                  name="userName"
-                />
-              </span>
-              <span *ngIf="!currentUser.isEdit">
-                {{ this.currentUser.userName }}
-              </span>
-            </h3>
-            <h3>
-              Email:
-              <span>{{ this.currentUser.email }}</span>
-            </h3>
-            <h3>
-              Role :<span *ngIf="currentUser.isEdit">
-                <input
-                  type="text"
-                  [(ngModel)]="currentUser.designation"
-                  name="designation"
-                />
-              </span>
-              <span *ngIf="!currentUser.isEdit">
-                {{ this.currentUser.designation }}
-              </span>
-            </h3>
-            <h3>
-              Phone:<span *ngIf="currentUser.isEdit">
-                <input
-                  type="text"
-                  [(ngModel)]="currentUser.number"
-                  name="number"
-                />
-              </span>
-              <span *ngIf="!currentUser.isEdit">
-                {{ this.currentUser.number }}
-              </span>
-            </h3>
-
-            <h3>
-              UserType: <span>{{ this.currentUser.userType }} </span>
-            </h3>
-
-            <div *ngIf="currentUser.isEdit">
-              <button
-                class="btn btn-primary m-2"
-                (click)="updateAdmin(form.value, currentUser)"
-              >
-                Save
-              </button>
-
-              <button
-                class="btn btn-secondary m-2"
-                (click)="currentUser.isEdit = false"
-              >
-                Cancel
-              </button>
-            </div>
-            <div *ngIf="!currentUser.isEdit">
-              <button
-                class="btn btn-primary m-2"
-                (click)="editAdmin(currentUser)"
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div> -->

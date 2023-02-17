@@ -34,6 +34,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { LoadingSpinerComponent } from './loading-spiner/loading-spiner.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { UserInfoModalComponent } from './dashbord/user-info-modal/user-info-modal.component';
 
 registerLocaleData(bg);
 
@@ -50,6 +52,7 @@ registerLocaleData(bg);
     ErrorComponent,
     LoadingSpinerComponent,
     DashbordComponent,
+    UserInfoModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ registerLocaleData(bg);
     }),
     NzSelectModule,
     NzButtonModule,
+    NzModalModule,
   ],
   providers: [
     UserdataService,
