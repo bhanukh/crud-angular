@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="user-table container">
   <div *ngIf="this.usertype === 'Admin'">
-    <div *ngIf="!isEdit">
+    <div>
       <table
         class="table table-dark table-striped table-hover table-responsive mt-5"
       >
@@ -56,17 +56,23 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="isEdit">
+    <div>
       <div class="modal">
         <nz-modal
           [(nzVisible)]="isEdit"
-          [nzStyle]="{ width: '50%' }"
+          [nzStyle]="{ width: '30%' }"
           (nzOnCancel)="handleCancel()"
           [nzFooter]="null"
+          nzWrapClassName="edit-user"
+          nzClassName="edit-class-user"
+          [nzMaskClosable]="false"
         >
           <ng-container *nzModalContent>
             <app-user-info-modal
               (submitData)="updateAdmin($event)"
+              [name]="name"
+              [designation]="designation"
+              [number]="number"
             ></app-user-info-modal>
           </ng-container>
         </nz-modal>

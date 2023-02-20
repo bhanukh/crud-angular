@@ -17,6 +17,10 @@ export class ProfileComponent {
   currentUser: any = [];
   loader = false;
 
+  name = '';
+  designation: string = '';
+  number: number = 0;
+
   constructor(
     private http: HttpClient,
     private auth: UserdataService,
@@ -44,6 +48,11 @@ export class ProfileComponent {
       this.currentUser = rep;
       localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
+
+      this.name = this.currentUser.userName;
+      this.designation = this.currentUser.designation;
+      this.number = this.currentUser.number;
+      console.warn(this.name);
     });
   }
 
@@ -53,6 +62,7 @@ export class ProfileComponent {
     this.updateInfo.designation = this.currentUser.designation;
     this.updateInfo.number = this.currentUser.number;
   }
+
   handleOk(): void {
     console.log('Button ok clicked!');
 

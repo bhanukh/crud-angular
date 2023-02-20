@@ -1,9 +1,9 @@
 <div class="form-div">
   <div class="gradient-custom">
-    <div class="container py-5 custom">
-      <div class="row d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row d-flex">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card bg-dark text-white" style="border-radius: 1rem">
+          <div class="card bg-dark text-white">
             <div class="card-body p-4 text-center">
               <!-- <button class="x" nz-button>X</button> -->
               <div class="mb-md-5 mt-md-4 pb-5">
@@ -19,11 +19,12 @@
                       >UserName</label
                     >
                     <input
-                      ngModel
+                      [(ngModel)]="userInfo.userName"
                       type="email"
                       name="userName"
                       id="typeUserNamerX"
                       #name="ngModel"
+                      value="Ram"
                       required
                       class="form-control form-control-lg"
                     /><span *ngIf="name.invalid && name.touched"
@@ -36,7 +37,7 @@
                       >Designation</label
                     >
                     <input
-                      ngModel
+                      [(ngModel)]="userInfo.designation"
                       required
                       type="text"
                       name="designation"
@@ -52,7 +53,7 @@
                       >Phone Number</label
                     >
                     <input
-                      ngModel
+                      [(ngModel)]="userInfo.number"
                       name
                       type="number"
                       name="number"

@@ -1,4 +1,4 @@
-.card {
+/* .card {
   margin-top: 12rem;
   padding: 2rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -8,4 +8,18 @@
 span {
   font-size: 1.6rem;
   padding: 1rem;
+} */
+.modal-body {
+  width: 100% !important;
+}
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #1d1a1a;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right bottom,
+    rgb(39, 37, 37),
+    rgb(36, 36, 36)
+  );
 }

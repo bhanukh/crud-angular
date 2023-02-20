@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserdataService } from 'src/app/service/userdata.service';
@@ -9,12 +9,15 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
   updateUserDet = {
     userName: '',
     designation: '',
     number: '',
   };
+  name = '';
+  designation: string = '';
+  number: number = 0;
 
   [x: string]: any;
   data: any = [];
@@ -40,6 +43,8 @@ export class UserListComponent {
       this.user = rep;
     });
   }
+
+  ngOnInit(): void {}
   showSuccess() {
     this.toaster.success('Selected user deleted successfully', 'Success');
   }
@@ -53,6 +58,11 @@ export class UserListComponent {
     this.updateUserDet.number = item.number;
     console.log('user', item);
     localStorage.setItem('selected', JSON.stringify(item));
+    this.select = localStorage.getItem('selected');
+    this.select = JSON.parse(this.select);
+    this.name = this.select.userName;
+    this.designation = this.select.designation;
+    this.number = this.select.number;
   }
   handleOk(): void {
     console.log('Button ok clicked!');

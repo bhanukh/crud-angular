@@ -5,7 +5,9 @@
   color: white;
   background: transparent;
   border: none;
-  margin-top: -2rem;
+
   font-size: 1.5rem;
-  margin-right: -1rem;
+}
+.custom {
+  width: 100%;
 }
