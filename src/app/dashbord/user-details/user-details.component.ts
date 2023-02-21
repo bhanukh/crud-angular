@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/service/userdata.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -19,6 +22,7 @@ export type userDetails = {
   userType: string;
   acessToken: string;
   uid: string;
+  picture: any;
 };
 
 @Component({
@@ -33,11 +37,12 @@ export class UserDetailsComponent implements OnInit {
   arr: any;
   currentUser: any = [];
   loader = false;
+  picUrl =
+    'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg';
   constructor(
     private router: Router,
     private auth: UserdataService,
-    private af: UntypedFormBuilder,
-    private toaster: ToastrService
+    private af: UntypedFormBuilder
   ) {
     this.userData = localStorage.getItem('logInUser');
     this.loader = true;
@@ -49,6 +54,7 @@ export class UserDetailsComponent implements OnInit {
       this.loader = false;
     });
   }
+
   ngOnInit(): void {}
   registerDetails(data: userDetails) {
     data = {
@@ -57,6 +63,7 @@ export class UserDetailsComponent implements OnInit {
       email: this.userData.email,
       acessToken: this.userData.accessToken,
       userType: this.userData.userType,
+      picture: this.picUrl,
     };
 
     this.auth.register(data).subscribe((res) => {

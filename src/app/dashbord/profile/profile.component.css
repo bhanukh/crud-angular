@@ -23,3 +23,6 @@ span {
     rgb(36, 36, 36)
   );
 }
+.userPic {
+  object-fit: cover;
+}
