@@ -13,16 +13,19 @@ span {
   width: 100% !important;
 }
 .gradient-custom {
-  /* fallback for old browsers */
   background: #1d1a1a;
 
-  /* Chrome 10-25, Safari 5.1-6 */
   background: -webkit-linear-gradient(
     to right bottom,
     rgb(39, 37, 37),
     rgb(36, 36, 36)
   );
 }
-.userPic {
-  object-fit: cover;
+.img-user {
+  border-radius: 50%;
+  object-fit: fill;
+  height: 15rem;
+  width: 12rem;
+  margin-top: 3rem;
+  margin-left: 3rem;
 }
