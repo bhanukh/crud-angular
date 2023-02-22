@@ -14,11 +14,10 @@ import { ToastrService } from 'ngx-toastr';
 
 export type userDetails = {
   userId?: string;
-  name: string;
+
   designation: string;
   email: string;
-  phone: string;
-  pass: string;
+
   userType: string;
   acessToken: string;
   uid: string;
@@ -38,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
   currentUser: any = [];
   loader = false;
   picUrl =
-    'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg';
+    'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png';
   constructor(
     private router: Router,
     private auth: UserdataService,

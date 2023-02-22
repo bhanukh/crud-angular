@@ -50,7 +50,7 @@ export class ProfileComponent {
   };
   loading = false;
   avatarUrl?: string;
-  imageUrl: any = [];
+  imageUrl: any;
 
   beforeUpload = (
     file: NzUploadFile,
@@ -90,8 +90,8 @@ export class ProfileComponent {
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.loading = false;
           this.avatarUrl = img;
-          this.imageUrl = Object.entries(this.avatarUrl);
-          //this.updatePicture(this.imageUrl);
+          this.imageUrl = JSON.stringify(this.avatarUrl);
+          this.updatePicture(this.avatarUrl);
           console.log(this.imageUrl);
         });
         break;
@@ -138,9 +138,10 @@ export class ProfileComponent {
   showSuccess() {
     this.toaster.success('Information updated successfully', 'Success');
   }
-  updatePicture(data: any) {
-    data = {
-      ...data,
+  updatePicture(data: string) {
+    console.warn(this.avatarUrl);
+    const reqData = {
+      picture: data,
       uid: this.currentUser.uid,
       email: this.currentUser.email,
       acessToken: this.currentUser.accessToken,
@@ -150,7 +151,9 @@ export class ProfileComponent {
       designation: this.currentUser.designation,
       number: this.currentUser.number,
     };
-    this.auth.updateInfo(data).subscribe((res) => {
+    //console.log(this.currentUser.picture);
+
+    this.auth.updateInfo(reqData).subscribe((res) => {
       this.auth.getData().subscribe((res) => {
         this.data = res;
         let rep = this.data.find((u: any) => this.userData.uid === u.uid);
