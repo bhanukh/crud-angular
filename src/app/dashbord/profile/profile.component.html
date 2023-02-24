@@ -8,12 +8,13 @@
   <button class="btn btn-secondary" routerLink="">Log In</button>
 </div>
 <div *ngIf="logInStatus">
+  <app-navbar></app-navbar>
   <div *ngIf="this.loader" style="height: 100vh">
     <app-loading-spiner></app-loading-spiner>
   </div>
 </div>
 <div *ngIf="!this.loader">
-  <app-navbar></app-navbar>
+
   <section class="vh-95" style="margin-top: 10rem">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -28,12 +29,6 @@
                 "
               >
                 <div>
-                  <!-- <img
-                    class="py-5"
-                    src="{{ this.currentUser.picture }}"
-                    style="border-radius: 50%; width: 150px"
-                    alt=""
-                  /> -->
                   <nz-upload
                     class="avatar-uploader py-5 userPic"
                     nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -46,26 +41,26 @@
                     <ng-container *ngIf="!avatarUrl">
                       <span class="upload-icon" nz-icon
                         ><img
-                          class="py-5 img-user"
+                          class="py-5 mt-2 img-user"
                           src="{{ this.currentUser.picture }}"
                           alt=""
                       /></span>
                     </ng-container>
-                    <img
+                    <img class="py-5 mt-2 img-user"
                       *ngIf="avatarUrl"
                       [src]="avatarUrl"
-                      style="width: 100%"
+
                     />
                   </nz-upload>
                 </div>
 
-                <h5 class="text-capitalize text-white mt-5">
+                <h5 class="text-capitalize text-white mt-4">
                   {{ this.currentUser.userName }}
                 </h5>
                 <p class="fw-bold text-capitalize">
                   {{ this.currentUser.designation }}
                 </p>
-                <div class="mb-2">
+                <div class="mb-3">
                   <button
                     nz-button
                     nzType="primary"
@@ -99,7 +94,8 @@
                       <p class="text-muted">{{ this.currentUser.userType }}</p>
                     </div>
                     <hr class="mt-0 mb-3" />
-                    <div class="col-12 mb-1">
+                    <div class="row pt-1">
+                      <div class="col-12 mb-1">
                       <h6>About Me</h6>
                       <p class="text-muted" style="font-size: 1rem">
                         Hey my name is
@@ -112,6 +108,7 @@
                         }}</span
                         >.
                       </p>
+                    </div>
                     </div>
                   </div>
                 </div>
