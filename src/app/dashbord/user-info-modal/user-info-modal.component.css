@@ -1,0 +1,13 @@
+.x {
+  height: 2rem;
+  width: 2rem;
+  float: right;
+  color: white;
+  background: transparent;
+  border: none;
+
+  font-size: 1.5rem;
+}
+.custom {
+  width: 100%;
+}

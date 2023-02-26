@@ -9,7 +9,9 @@
     <button class="btn btn-secondary" routerLink="">Log In</button>
   </div>
   <div *ngIf="logInStatus">
+      <app-navbar></app-navbar>
     <div *ngIf="!this.currentUser">
+      <app-navbar></app-navbar>
       <app-user-details></app-user-details>
     </div>
     <div *ngIf="this.currentUser">
@@ -17,8 +19,10 @@
         <app-loading-spiner></app-loading-spiner>
       </div>
       <div *ngIf="!this.loader">
+        <app-navbar></app-navbar>
         <app-profile></app-profile>
       </div>
     </div>
   </div>
 </div>
+

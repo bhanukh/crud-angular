@@ -9,8 +9,29 @@ span {
   font-size: 1.6rem;
   padding: 1rem;
 } */
+<<<<<<< HEAD
 .form {
   margin-top: -10rem !important;
+=======
+.modal-body {
+  width: 100% !important;
+}
+.gradient-custom {
+  background: #1d1a1a;
+
+  background: -webkit-linear-gradient(
+    to right bottom,
+    rgb(39, 37, 37),
+    rgb(36, 36, 36)
+  );
+}
+.img-user {
+  border-radius: 50%;
+  object-fit: fill;
+  height: 15rem;
+  width: 10rem;
+
+>>>>>>> de36e88d150a6618389dad6bfd8e8caf6f861c60
 }
 body {
 	background-color: #f5f7fa;

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/service/userdata.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -11,14 +14,14 @@ import { ToastrService } from 'ngx-toastr';
 
 export type userDetails = {
   userId?: string;
-  name: string;
+
   designation: string;
   email: string;
-  phone: string;
-  pass: string;
+
   userType: string;
   acessToken: string;
   uid: string;
+  picture: any;
 };
 
 @Component({
@@ -33,11 +36,12 @@ export class UserDetailsComponent implements OnInit {
   arr: any;
   currentUser: any = [];
   loader = false;
+  picUrl =
+    'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png';
   constructor(
     private router: Router,
     private auth: UserdataService,
-    private af: UntypedFormBuilder,
-    private toaster: ToastrService
+    private af: UntypedFormBuilder
   ) {
     this.userData = localStorage.getItem('logInUser');
     this.loader = true;
@@ -49,6 +53,7 @@ export class UserDetailsComponent implements OnInit {
       this.loader = false;
     });
   }
+
   ngOnInit(): void {}
   registerDetails(data: userDetails) {
     data = {
@@ -57,6 +62,7 @@ export class UserDetailsComponent implements OnInit {
       email: this.userData.email,
       acessToken: this.userData.accessToken,
       userType: this.userData.userType,
+      picture: this.picUrl,
     };
 
     this.auth.register(data).subscribe((res) => {
