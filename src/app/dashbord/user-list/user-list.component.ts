@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserdataService } from 'src/app/service/userdata.service';
 import { getAuth, deleteUser } from 'firebase/auth';
 
-const auth = getAuth();
+// const auth = getAuth();
 
 @Component({
   selector: 'app-user-list',
@@ -80,7 +80,7 @@ export class UserListComponent {
     });
   }
 
-  deleteUser(userId: string) {
+  deleteUserDet(userId: string,uid:any) {
     this.auth.deleteUser(userId).subscribe((res) => {
       this.data = this.data.filter((eachData: any) => {
         eachData.userId !== userId;
@@ -89,7 +89,9 @@ export class UserListComponent {
         this.user = Object.values(resp);
         let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
         this.user = rep;
-        deleteUser();
+        deleteUser(uid).then((res)=>{
+                     console.log(res)
+        });
       });
       this.showSuccess();
     });

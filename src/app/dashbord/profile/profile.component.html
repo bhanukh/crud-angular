@@ -19,7 +19,41 @@
           class="d-flex h-100 justify-content-center align-items-center"
           *ngIf="!currentUser.isEdit"
         >
-          <div class="card bg-dark text-white">
+        <div class="container">
+          <section class="mx-auto my-5" style="max-width: 23rem;">
+              
+            <div class="card testimonial-card mt-2 mb-3">
+              <div class="card-up aqua-gradient"></div>
+              <div class="avatar mx-auto white">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2831%29.jpg" class="rounded-circle img-fluid"
+                  alt="woman avatar">
+              </div>
+              <div class="card-body text-center">
+                <h4 class="card-title font-weight-bold text-capitalize"> {{ this.currentUser.userName }}</h4>
+                <hr>
+                <h5 class="card-title font-weight-bold text-capitalize">{{ this.currentUser.designation }}</h5>
+                <hr>
+                <h6>Email</h6>
+                <h5>{{this.currentUser.email}}</h5>
+                <hr>
+                <h6>Phone Number</h6>
+                <h5>{{this.currentUser.number}}</h5>
+                <hr>
+                <h6>UserType</h6>
+                <h5>{{this.currentUser.userType}}</h5>
+                <button
+                class="btn btn-primary m-2"
+                (click)="editAdmin(currentUser)"
+              >
+                Edit
+              </button>
+              </div>
+            </div>
+            
+          </section>
+        </div>
+        </div>
+          <!-- <div class="card bg-dark text-white">
             <h3>
               Name:
               <span class="text-capitalize">
@@ -55,7 +89,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
         <div *ngIf="currentUser.isEdit">
           <div class="form">
             <div class="vh-60 gradient-custom">
