@@ -1,14 +1,52 @@
-div {
-  text-align: center;
-  margin-top: 5rem;
-}
-.card {
+/* .card {
+  margin-top: 12rem;
   padding: 2rem;
-  margin: auto;
-  margin-top: 5rem;
-  width: 50%;
-  height: auto;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+span {
+  font-size: 1.6rem;
+  padding: 1rem;
+} */
+.modal-body {
+  width: 100% !important;
+}
+.gradient-custom {
+  background: #1d1a1a;
+
+  background: -webkit-linear-gradient(
+    to right bottom,
+    rgb(39, 37, 37),
+    rgb(36, 36, 36)
+  );
+}
+.img-user {
+  border-radius: 50%;
+  object-fit: fill;
+  height: 15rem;
+  width: 10rem;
+
+}
+body {
+	background-color: #f5f7fa;
+}
+
+.testimonial-card .card-up {
+  height: 120px;
+  overflow: hidden;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+
+.aqua-gradient {
+  background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+}
+
+.testimonial-card .avatar {
+  width: 120px;
+  margin-top: -60px;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 50%;
 }

@@ -1,4 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.custom {
+  width: 28%;
+  margin: auto;
+}
+.profile {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.edit-class-user .ant-modal-content {
+  background-color: transparent !important;
+}
+
+.edit-class-user .ant-modal-body {
+  padding: 0 !important;
+  box-shadow: none;
+}
+.ant-modal-close-x {
+  margin-top: -1rem;
+  margin-right: 0;
+  color: white;
+}
+.col-md-8 {
+  width: 100%;
+  padding: 0;
+}
+
+@media (max-width: 1024px) {
+  .ant-modal {
+    width: 50% !important;
+  }
+  .custom {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ant-modal {
+    width: 60% !important;
+  }
+  .custom {
+    width: 50%;
+  }
+}
+@media (max-width: 480px) {
+  .custom {
+    width: 60%;
+  }
+}

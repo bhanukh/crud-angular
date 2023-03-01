@@ -1,0 +1,102 @@
+<div>
+  <div *ngIf="!this.currentUser">
+    <div>
+      <div class="vh-100 gradient-custom custom">
+        <div class="container py-5 h-100">
+          <div
+            class="row d-flex justify-content-center align-items-center h-100"
+          >
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-dark text-white" style="border-radius: 1rem">
+                <div class="card-body p-5 text-center">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    <h2 class="fw-bold mb-2 text-uppercase text-white">
+                      Register Details
+                    </h2>
+                    <p class="text-white-50 mb-5">
+                      Please enter your details here!
+                    </p>
+                    <form
+                      #form="ngForm"
+                      (ngSubmit)="registerDetails(form.value)"
+                    >
+                      <div class="form-outline form-white mb-4">
+                        <label class="form-label mt-1" for="typeEmailX"
+                          >UserName</label
+                        >
+                        <input
+                          ngModel
+                          type="email"
+                          name="userName"
+                          id="typeUserNamerX"
+                          #name="ngModel"
+                          required
+                          class="form-control form-control-lg"
+                        /><span *ngIf="name.invalid && name.touched"
+                          >Please enter your name.</span
+                        >
+                      </div>
+
+                      <div class="form-outline form-white mb-4">
+                        <label class="form-label mt-1" for="typeDesX"
+                          >Designation</label
+                        >
+                        <input
+                          ngModel
+                          required
+                          type="text"
+                          name="designation"
+                          id="typeDesX"
+                          #role="ngModel"
+                          class="form-control form-control-lg"
+                        /><span *ngIf="role.invalid && role.touched"
+                          >Please enter your degignation.</span
+                        >
+                      </div>
+                      <div class="form-outline form-white mb-4">
+                        <label class="form-label mt-1" for="typeNumX"
+                          >Phone Number</label
+                        >
+                        <input
+                          ngModel
+                          name
+                          type="number"
+                          name="number"
+                          id="typeNumX"
+                          #phone="ngModel"
+                          required
+                          pattern="[0-9]{4,12}"
+                          class="form-control form-control-lg"
+                        />
+                        <span *ngIf="phone.invalid && phone.touched"
+                          >Please enter your Phone number.</span
+                        >
+                      </div>
+
+                      <button
+                        class="btn btn-outline-light btn-lg px-5 mt-3"
+                        type="submit"
+                        [disabled]="form.invalid"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+
+                  <div>
+                    <p class="mb-0">
+                      <a routerLink="" class="text-white-50 fw-bold">Back</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="this.currentUser">
+      <app-profile></app-profile>
+    </div>
+  </div>
+</div>
