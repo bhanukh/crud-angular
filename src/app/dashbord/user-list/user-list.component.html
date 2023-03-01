@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+
 <div class="user-table container">
   <div *ngIf="this.usertype === 'Admin'">
     <div>
@@ -43,15 +43,10 @@
                   Edit
                 </button>
                 <button
-<<<<<<< HEAD
-                  class="btn btn-danger m-1"
-                  (click)="deleteUserDet(item.userId,item.uid)"
-=======
                   nz-button
                   nzType="primary"
                   nzDanger
-                  (click)="deleteUser(item.userId)"
->>>>>>> de36e88d150a6618389dad6bfd8e8caf6f861c60
+                  (click)="deleteUserDet(item.userId)"
                 >
                   Delete
                 </button>

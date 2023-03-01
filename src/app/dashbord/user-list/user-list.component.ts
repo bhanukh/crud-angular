@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserdataService } from 'src/app/service/userdata.service';
-<<<<<<< HEAD
-import { getAuth, deleteUser } from 'firebase/auth';
-
-// const auth = getAuth();
-=======
 import { NzModalService } from 'ng-zorro-antd/modal';
->>>>>>> de36e88d150a6618389dad6bfd8e8caf6f861c60
+import { AuthService } from 'src/app/service/auth.service';
+
+import { getAuth, deleteUser } from "firebase/auth";
+
 
 @Component({
   selector: 'app-user-list',
@@ -36,7 +34,9 @@ export class UserListComponent implements OnInit {
     private auth: UserdataService,
     private modal: NzModalService,
     private router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private fireAuth:AuthService
+
   ) {
     this.auth.getData().subscribe((resData) => {
       this.user = Object.values(resData);
@@ -104,23 +104,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-  deleteUserDet(userId: string,uid:any) {
-    this.auth.deleteUser(userId).subscribe((res) => {
-      this.data = this.data.filter((eachData: any) => {
-        eachData.userId !== userId;
-      });
-      this.auth.allData().subscribe((resp) => {
-        this.user = Object.values(resp);
-        let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
-        this.user = rep;
-        deleteUser(uid).then((res)=>{
-                     console.log(res)
-        });
-      });
-      this.showSuccess();
-=======
-  deleteUser(userId: string) {
+  deleteUserDet(userId: string) {
     this.modal.confirm({
       nzTitle: 'Are you sure delete this user?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
@@ -141,8 +125,11 @@ export class UserListComponent implements OnInit {
         });
       },
       nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel'),
->>>>>>> de36e88d150a6618389dad6bfd8e8caf6f861c60
+      nzOnCancel: () => console.log('Cancel')
+
+     
+
     });
+  
   }
 }

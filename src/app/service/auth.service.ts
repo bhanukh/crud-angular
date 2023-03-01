@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
+
 export interface UserType {
   id?: string;
   userName: string;
@@ -19,7 +20,9 @@ export class AuthService {
   res: any;
   result: any;
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) {}
+  constructor(private fireauth: AngularFireAuth, private router: Router,
+    
+    ) {}
 
   //login
   login(email: string, pass: string) {
@@ -83,7 +86,7 @@ export class AuthService {
     return false;
   }
   //delete user account
-  // deleteAcc(uid: any) {
-  //   return deleteUser(uid);
+  // deleteUser(userId: string): Promise<void> {
+    
   // }
 }
