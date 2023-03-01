@@ -50,6 +50,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
+
   ngOnInit(): void {}
   showSuccess() {
     this.toaster.success('Selected user deleted successfully', 'Success');
@@ -75,6 +76,15 @@ export class UserListComponent implements OnInit {
 
     this.isEdit = false;
   }
+
+  deleteUser(userId: string) {
+    if (confirm('do you want to delete user?')) {
+      this.auth.deleteUser(userId).subscribe((res) => {
+        this.data = this.data.filter((eachData: any) => {
+          eachData.userId !== userId;
+          // this.auth.getData();
+        });
+
 
   handleCancel(): void {
     console.log('Button cancel clicked!');

@@ -16,6 +16,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
+
   isEdit = false;
 
   @ViewChild('preview', { static: true }) preview: ElementRef | undefined;
@@ -39,6 +40,15 @@ export class ProfileComponent {
   ) {
     this.data = localStorage.getItem('logInUser');
     this.userData = JSON.parse(this.data);
+
+  userData: any ;
+  data: any ;
+
+  constructor(private http: HttpClient, private auth: UserdataService) {
+    this.data = localStorage.getItem('logInUser');
+    this.userData = JSON.parse(this.data);
+    console.log(this.userData);
+
 
     this.logInStatus = this.af.isLoggedIn();
     this.updateAdmin.bind(this);
