@@ -66,8 +66,9 @@ export class UserDetailsComponent implements OnInit {
     };
 
     this.auth.register(data).subscribe((res) => {
-
-      this.router.navigate(['main/profile']);
+      window.location.assign('main/profile')
+      this.router.navigate(['main/profile/']);
+      
     });
   }
 }

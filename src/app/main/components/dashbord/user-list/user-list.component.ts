@@ -41,7 +41,8 @@ export class UserListComponent implements OnInit {
 
       this.userData = localStorage.getItem('logInUser');
       this.userData = JSON.parse(this.userData);
-      this.usertype = localStorage.getItem('userType');
+      console.log(this.userData.userType)
+      this.usertype = this.userData.userType;
 
       let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
       this.user = rep;

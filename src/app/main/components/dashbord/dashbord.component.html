@@ -1,18 +1,18 @@
+<div *ngIf="this.currentUser">
 
+  <div *ngIf="this.loader" style="height: 100vh">
+    <app-loading-spiner></app-loading-spiner>
+  </div>
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+  <!-- <div *ngIf="!this.loader">
+    <app-profile></app-profile>
+  </div> -->
+</div>
 <div>
     <div *ngIf="!this.currentUser">
       <app-user-details></app-user-details>
     </div>
-    <div *ngIf="this.currentUser">
-
-      <div *ngIf="this.loader" style="height: 100vh">
-        <app-loading-spiner></app-loading-spiner>
-      </div>
-      <app-navbar></app-navbar>
-      <router-outlet></router-outlet>
-      <!-- <div *ngIf="!this.loader">
-        <app-profile></app-profile>
-      </div> -->
-    </div>
+   
   </div>
 

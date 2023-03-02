@@ -27,12 +27,12 @@ export class DashbordComponent {
     this.loader = true;
     this.auth.getData().subscribe((res) => {
       this.data = res;
-      let rep = this.data.find((u: any) => this.data.uid === u.uid);
+      let rep = this.data.find((u: any) => this.userData.uid === u.uid);
 
       this.currentUser = rep;
      console.log(rep);
 
-      localStorage.setItem('userType', this.currentUser.userType);
+      // localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
     });
   }

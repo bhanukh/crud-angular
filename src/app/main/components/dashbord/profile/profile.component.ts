@@ -101,7 +101,7 @@ export class ProfileComponent {
       let rep = this.data.find((u: any) => this.userData.uid === u.uid);
 
       this.currentUser = rep;
-      localStorage.setItem('userType', this.currentUser.userType);
+     // localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
       console.log(rep);
 
