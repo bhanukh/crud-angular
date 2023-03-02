@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 export class DashbordComponent {
   userData: any;
   data: any;
-  logInStatus: boolean;
   currentUser: any = [];
   loader = false;
   constructor(
@@ -22,17 +21,17 @@ export class DashbordComponent {
   ) {
     this.data = localStorage.getItem('logInUser');
     this.userData = JSON.parse(this.data);
-
-    this.logInStatus = this.af.isLoggedIn();
   }
 
   ngOnInit() {
     this.loader = true;
     this.auth.getData().subscribe((res) => {
       this.data = res;
-      let rep = this.data.find((u: any) => this.userData.uid === u.uid);
+      let rep = this.data.find((u: any) => this.data.uid === u.uid);
 
       this.currentUser = rep;
+     console.log(rep);
+
       localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
     });

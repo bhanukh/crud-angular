@@ -31,7 +31,7 @@ export type userDetails = {
 })
 export class UserDetailsComponent implements OnInit {
   validateForm!: UntypedFormGroup;
-  data: any[] = [];
+  data: any = [];
   userData: any = {};
   arr: any;
   currentUser: any = [];
@@ -66,7 +66,8 @@ export class UserDetailsComponent implements OnInit {
     };
 
     this.auth.register(data).subscribe((res) => {
-      this.router.navigate(['/profile']);
+
+      this.router.navigate(['main/profile']);
     });
   }
 }

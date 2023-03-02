@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           this.userData = localStorage.getItem('logInUser');
           this.userData = JSON.parse(this.userData);
         });
-        this.router.navigate(['dashbord']);
+        this.router.navigate(['main/profile']);
       })
       .catch((error) => {
         this.showError();

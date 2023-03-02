@@ -3,11 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { UserdataService } from 'src/app/service/userdata.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, Observer, Subscriber } from 'rxjs';
-
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
@@ -22,7 +19,6 @@ export class ProfileComponent {
   @ViewChild('preview', { static: true }) preview: ElementRef | undefined;
   userData: any;
   data: any;
-  logInStatus: boolean;
   currentUser: any = [];
   loader = false;
 
@@ -40,9 +36,6 @@ export class ProfileComponent {
   ) {
     this.data = localStorage.getItem('logInUser');
     this.userData = JSON.parse(this.data);
-
-
-    this.logInStatus = this.af.isLoggedIn();
     this.updateAdmin.bind(this);
   }
   updateInfo = {
@@ -88,7 +81,6 @@ export class ProfileComponent {
         this.loading = true;
         break;
       case 'done':
-        // Get this url from response in real world.
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.loading = false;
           this.avatarUrl = img;
@@ -98,7 +90,6 @@ export class ProfileComponent {
         });
         break;
       case 'error':
-        //this.msg.error('Network error');
         this.loading = false;
         break;
     }
@@ -112,6 +103,8 @@ export class ProfileComponent {
       this.currentUser = rep;
       localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
+      console.log(rep);
+
 
       this.name = this.currentUser.userName;
       this.designation = this.currentUser.designation;

@@ -1,22 +1,10 @@
 
-<div
-  class="d-flex flex-column justify-content-center align-items-center"
-  style="height: 100vh"
-  *ngIf="!logInStatus"
->
-
-  <h1 class="">Please log in first</h1>
-  <br />
-  <button class="btn btn-secondary" routerLink="">Log In</button>
-</div>
-<div *ngIf="logInStatus">
-
   <div *ngIf="this.loader" style="height: 100vh">
     <app-loading-spiner></app-loading-spiner>
   </div>
-</div>
+
 <div *ngIf="!this.loader">
-  
+
   <section class="vh-95" style="margin-top: 10rem">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -144,18 +132,5 @@
       </div>
     </nz-modal>
   </div>
-
-<!-- <app-navbar></app-navbar>
-<div>
-  <nz-card [nzExtra]="extraTemplate">
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
-  </nz-card>
-  <ng-template #extraTemplate>
-    <a (click)="userProfile(this.userData)">More</a> -->
-  <!-- </ng-template> -->
-
-  <!-- <app-card></app-card> -->
 
 </div>

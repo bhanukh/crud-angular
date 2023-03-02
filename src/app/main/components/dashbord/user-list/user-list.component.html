@@ -1,4 +1,3 @@
-
 <div class="user-table container">
   <div *ngIf="this.usertype === 'Admin'">
     <div>
@@ -78,8 +77,8 @@
         </nz-modal>
       </div>
     </div>
+    </div>
     <div *ngIf="this.usertype === 'Basic'">
-      <form #form="ngForm">
         <table
           class="table table-hover table-dark table-striped table-responsive mt-5"
         >
@@ -108,7 +107,5 @@
             </tr>
           </tbody>
         </table>
-      </form>
     </div>
   </div>
-</div>

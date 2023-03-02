@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { userDetails } from '../dashbord/user-details/user-details.component';
+import { userDetails } from '../main/components/dashbord/user-details/user-details.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';

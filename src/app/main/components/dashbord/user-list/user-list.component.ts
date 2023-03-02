@@ -5,8 +5,6 @@ import { UserdataService } from 'src/app/service/userdata.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/service/auth.service';
 
-import { getAuth, deleteUser } from "firebase/auth";
-
 
 @Component({
   selector: 'app-user-list',
@@ -126,10 +124,7 @@ export class UserListComponent implements OnInit {
       },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
-
-     
-
     });
-  
+
   }
 }
