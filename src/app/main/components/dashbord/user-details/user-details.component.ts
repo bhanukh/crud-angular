@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/service/userdata.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { Location } from '@angular/common';
 
 import {
   UntypedFormBuilder,
@@ -41,7 +42,8 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: UserdataService,
-    private af: UntypedFormBuilder
+    private af: UntypedFormBuilder,
+    private location:Location
   ) {
     this.userData = localStorage.getItem('logInUser');
     this.loader = true;
@@ -66,9 +68,14 @@ export class UserDetailsComponent implements OnInit {
     };
 
     this.auth.register(data).subscribe((res) => {
-      window.location.assign('main/profile')
-      this.router.navigate(['main/profile/']);
+      this.router.navigateByUrl("main/profile",{ skipLocationChange:true }).then(()=>{
+
+        this.router.navigate([decodeURI(this.location.path())]);
+      }
+      )
+      });
+     // this.router.navigate(['main/profile']);
       
-    });
+    };
   }
-}
+
