@@ -22,7 +22,6 @@ export class UserInfoModalComponent implements OnInit {
       designation: this.designation,
       number: this.number,
     };
-    console.warn(this.name);
   }
   constructor() {}
 }

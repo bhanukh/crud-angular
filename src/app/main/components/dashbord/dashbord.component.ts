@@ -28,11 +28,7 @@ export class DashbordComponent {
     this.auth.getData().subscribe((res) => {
       this.data = res;
       let rep = this.data.find((u: any) => this.userData.uid === u.uid);
-
       this.currentUser = rep;
-     console.log(rep);
-
-      // localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
     });
   }

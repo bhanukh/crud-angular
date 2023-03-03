@@ -28,6 +28,9 @@ span {
   width: 10rem;
 
 }
+.image-user:hover{
+  opacity: 0.9;
+}
 body {
 	background-color: #f5f7fa;
 }

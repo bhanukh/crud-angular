@@ -10,6 +10,8 @@ import { UserInfoModalComponent } from './components/dashbord/user-info-modal/us
 import { UserListComponent } from './components/dashbord/user-list/user-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { LoadingSpinerComponent } from '../shared/components/loading-spiner/loading-spiner.component';
+import { ComponentPipe } from './components/pipes/filter-Name.pipe';
+import { ShortPipe } from './components/dashbord/short.pipe';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { LoadingSpinerComponent } from '../shared/components/loading-spiner/load
     DashbordComponent,
     UserInfoModalComponent,
     ProfileComponent,
+    ComponentPipe,
+    ShortPipe,
 
   ],
   imports: [

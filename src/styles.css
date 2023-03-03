@@ -34,6 +34,9 @@ body {
   width: 100%;
   padding: 0;
 }
+.user-table{
+  overflow: auto;
+}
 
 @media (max-width: 1024px) {
   .ant-modal {
@@ -42,14 +45,21 @@ body {
   .custom {
     width: 40%;
   }
+  .user-table{
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
   .ant-modal {
     width: 60% !important;
+
   }
   .custom {
     width: 50%;
+  }
+  .user-table{
+    width: 100%;
   }
 }
 @media (max-width: 480px) {

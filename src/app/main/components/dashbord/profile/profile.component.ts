@@ -55,13 +55,11 @@ export class ProfileComponent {
       const isJpgOrPng =
         file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isJpgOrPng) {
-        //this.msg.error('You can only upload JPG file!');
         observer.complete();
         return;
       }
       const isLt2M = file.size! / 1024 / 1024 < 2;
       if (!isLt2M) {
-        //this.msg.error('Image must smaller than 2MB!');
         observer.complete();
         return;
       }
@@ -99,16 +97,15 @@ export class ProfileComponent {
     this.auth.getData().subscribe((res) => {
       this.data = res;
       let rep = this.data.find((u: any) => this.userData.uid === u.uid);
-
       this.currentUser = rep;
-     // localStorage.setItem('userType', this.currentUser.userType);
       this.loader = false;
-      console.log(rep);
 
-
-      this.name = this.currentUser.userName;
+   if(this.currentUser){
+    this.name = this.currentUser.userName;
       this.designation = this.currentUser.designation;
       this.number = this.currentUser.number;
+   }
+
     });
   }
 
@@ -120,13 +117,10 @@ export class ProfileComponent {
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-
     this.isEdit = false;
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isEdit = false;
   }
 
@@ -134,7 +128,6 @@ export class ProfileComponent {
     this.toaster.success('Information updated successfully', 'Success');
   }
   updatePicture(data: string) {
-    console.warn(this.avatarUrl);
     const reqData = {
       picture: data,
       uid: this.currentUser.uid,
@@ -146,7 +139,6 @@ export class ProfileComponent {
       designation: this.currentUser.designation,
       number: this.currentUser.number,
     };
-    //console.log(this.currentUser.picture);
 
     this.auth.updateInfo(reqData).subscribe((res) => {
       this.auth.getData().subscribe((res) => {
@@ -169,11 +161,9 @@ export class ProfileComponent {
     };
     this.auth.updateInfo(data).subscribe((res) => {
       this.auth.getData().subscribe((res) => {
-        console.log(res);
         this.data = res;
         let rep = this.data.find((u: any) => this.userData.uid === u.uid);
         this.currentUser = rep;
-        console.log(rep);
         this.isEdit = false;
       });
       this.showSuccess();

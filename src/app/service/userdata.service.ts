@@ -54,4 +54,5 @@ export class UserdataService {
   deleteUser(userId: string): Observable<string> {
     return this.http.delete<string>(this.url + userId + '.json');
   }
+
 }

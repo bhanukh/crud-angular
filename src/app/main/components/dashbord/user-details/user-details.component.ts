@@ -1,24 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/service/userdata.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
-import { Location } from '@angular/common';
 
 import {
-  UntypedFormBuilder,
   UntypedFormGroup,
-  Validators,
-  FormGroup,
 } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 
 export type userDetails = {
   userId?: string;
-
   designation: string;
   email: string;
-
   userType: string;
   acessToken: string;
   uid: string;
@@ -39,11 +30,10 @@ export class UserDetailsComponent implements OnInit {
   loader = false;
   picUrl =
     'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png';
+
   constructor(
     private router: Router,
     private auth: UserdataService,
-    private af: UntypedFormBuilder,
-    private location:Location
   ) {
     this.userData = localStorage.getItem('logInUser');
     this.loader = true;
@@ -68,14 +58,13 @@ export class UserDetailsComponent implements OnInit {
     };
 
     this.auth.register(data).subscribe((res) => {
-      this.router.navigateByUrl("main/profile",{ skipLocationChange:true }).then(()=>{
 
-        this.router.navigate([decodeURI(this.location.path())]);
-      }
-      )
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
       });
-     // this.router.navigate(['main/profile']);
-      
     };
-  }
+   }
+
 

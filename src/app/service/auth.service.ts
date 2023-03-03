@@ -21,7 +21,7 @@ export class AuthService {
   result: any;
 
   constructor(private fireauth: AngularFireAuth, private router: Router,
-    
+
     ) {}
 
   //login
@@ -38,7 +38,6 @@ export class AuthService {
           userType: respUser.displayName,
         };
         localStorage.setItem('logInUser', JSON.stringify(user));
-        console.log(user.userType);
       });
   }
   //sign up
@@ -51,15 +50,6 @@ export class AuthService {
           response?.updateProfile({
             displayName: user.userType,
           });
-
-          //const respUser = (response.user?.multiFactor as any).user;
-          // const user = {
-          //   refreshToken: respUser.stsTokenManager.refreshToken,
-          //   accessToken: respUser.stsTokenManager.accessToken,
-          //   uid: respUser.uid,
-          //   email: respUser.email,
-          // };
-          // localStorage.setItem('user', JSON.stringify(user));
         });
       });
   }
@@ -85,8 +75,4 @@ export class AuthService {
     }
     return false;
   }
-  //delete user account
-  // deleteUser(userId: string): Promise<void> {
-    
-  // }
 }

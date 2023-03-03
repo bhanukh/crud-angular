@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { UserdataService } from './service/userdata.service';
+declare var $: any;
 
 @Component({
   selector: 'app-root',
