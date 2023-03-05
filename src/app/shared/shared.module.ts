@@ -28,6 +28,7 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { AuthService } from '../service/auth.service';
 import { UserdataService } from '../service/userdata.service';
 import { ErrorComponent } from './components/error/error.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -65,7 +66,7 @@ import { ErrorComponent } from './components/error/error.component';
     NzModalModule,
     NzUploadModule,
     NzIconModule,
-
+    NgbPaginationModule
 
   ],
   exports:[
@@ -85,6 +86,7 @@ import { ErrorComponent } from './components/error/error.component';
     NzModalModule,
     NzUploadModule,
     NzIconModule,
+    NgbPaginationModule
   ],
   providers: [
     UserdataService,

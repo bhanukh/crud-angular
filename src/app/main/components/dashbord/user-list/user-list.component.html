@@ -1,23 +1,24 @@
-
 <div class="user-table container">
-  <input [(ngModel)]="searchValue" class="form-control mt-4"  id="myInput" type="text" placeholder="Search..">
+  <input [(ngModel)]="searchValue" class="form-control mt-4" id="myInput" type="text" placeholder="Search..">
   <div *ngIf="this.usertype === 'Admin'">
     <div>
-      <table
-        class="table  table-dark table-striped table-hover table-responsive mt-5"
-      >
+      <table class="table  table-dark table-striped table-hover table-responsive mt-5">
         <thead class="text-center">
           <tr style="font-size: 1rem;">
-            <th scope="col">Name</th>
+            <th scope="col">Name<span (click)="sort('userName')" style="padding: 2px; cursor: pointer;" nz-icon
+                nzType="sort-ascending" nzTheme="outline"></span></th>
             <th scope="col">Email</th>
-            <th scope="col">Designation</th>
+            <th scope="col">Designation<span (click)="sort('designation')" style="padding: 2px; cursor: pointer;"
+                nz-icon nzType="sort-ascending" nzTheme="outline"></span></th>
             <th scope="col">PhoneNumber</th>
-            <th scope="col">Type</th>
+            <th scope="col">Type<span (click)="sort('userType')" style="padding: 2px; cursor: pointer;" nz-icon
+                nzType="sort-ascending" nzTheme="outline"></span></th>
             <th scope="col">Update</th>
           </tr>
         </thead>
         <tbody class="text-center">
-          <tr style="font-size: 1rem;" scope="row" *ngFor="let item of user | filterName:searchValue">
+          <tr style="font-size: 1rem;" scope="row"
+            *ngFor="let item of user | slice:(currentPage-1)*pageSize:currentPage*pageSize |  sort:sortKey:reverse | filterName:searchValue ">
             <td class="text-capitalize">
               {{ item.userName }}
             </td>
@@ -35,79 +36,63 @@
             </td>
             <td>
               <div>
-                <button
-                  nz-button
-                  nzType="primary"
-                  class="btn btn-secondary m-1"
-                  (click)="showModal(item)"
-                >
-                  Edit
+                <button nz-button nzType="primary" class="btn btn-secondary m-1" (click)="showModal(item)">
+                  <span nz-icon nzType="edit" nzTheme="outline"></span>
                 </button>
-                <button
-                  nz-button
-                  nzType="primary"
-                  nzDanger
-                  (click)="deleteUserDet(item.userId)"
-                >
-                  Delete
+                <button nz-button nzType="primary" nzDanger (click)="deleteUserDet(item.userId)">
+                  <span nz-icon nzType="delete" nzTheme="outline"></span>
                 </button>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <ngb-pagination [collectionSize]="user.length" [(page)]="currentPage" [pageSize]="pageSize"></ngb-pagination>
     </div>
     <div>
       <div class="modal">
-        <nz-modal
-          [(nzVisible)]="isEdit"
-          [nzStyle]="{ width: '30%' }"
-          (nzOnCancel)="handleCancel()"
-          [nzFooter]="null"
-          nzWrapClassName="edit-user"
-          nzClassName="edit-class-user"
-          [nzMaskClosable]="false"
-        >
+        <nz-modal [(nzVisible)]="isEdit" [nzStyle]="{ width: '30%' }" (nzOnCancel)="handleCancel()" [nzFooter]="null"
+          nzWrapClassName="edit-user" e nzClassName="edit-class-user" [nzMaskClosable]="false">
           <ng-container *nzModalContent>
-            <app-user-info-modal
-              (submitData)="updateAdmin($event)"
-              [name]="name"
-              [designation]="designation"
-              [number]="number"
-            ></app-user-info-modal>
+            <app-user-info-modal (submitData)="updateAdmin($event)" [name]="name" [designation]="designation"
+              [number]="number"></app-user-info-modal>
           </ng-container>
         </nz-modal>
       </div>
     </div>
-    </div>
-    <div *ngIf="this.usertype === 'Basic'">
-        <table
-          class="table table-hover table-dark table-striped table-responsive mt-5"
-        >
-          <thead class="text-center">
-            <tr style="font-size: 1.1rem;">
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Designation</th>
-              <th scope="col">PhoneNumber</th>
-              <th scope="col">Type</th>
-            </tr>
-          </thead>
-          <tbody class="text-center">
-            <tr style="font-size: 1rem;" scope="row" *ngFor="let item of user | filterName:searchValue">
-              <td class="text-capitalize">
-                {{ item.userName }}
-              </td>
-              <td>{{ item.email }}</td>
-              <td class="text-capitalize">
-                {{ item.designation }}
-              </td>
-              <td>
-                {{ item.number }}
-              </td>
-              <td>{{ item.userType }}</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
   </div>
+  <div *ngIf="this.usertype === 'Basic'">
+    <table class="table table-hover table-dark table-striped table-responsive mt-5">
+      <thead class="text-center">
+        <tr style="font-size: 1.1rem;">
+          <th scope="col">Name<span (click)="sort('userName')" style="padding: 2px; cursor: pointer;" nz-icon
+              nzType="sort-ascending" nzTheme="outline"></span></th>
+          <th scope="col">Email</th>
+          <th scope="col">Designation <span (click)="sort('designation')" style="padding: 2px; cursor: pointer;" nz-icon
+              nzType="sort-ascending" nzTheme="outline"></span></th>
+          <th scope="col">PhoneNumber</th>
+          <th scope="col">Type <span (click)="sort('userType')" style="padding: 2px; cursor: pointer;" nz-icon
+              nzType="sort-ascending" nzTheme="outline"></span></th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr style="font-size: 1rem;" scope="row"
+          *ngFor="let item of user | slice:(currentPage-1)*pageSize:currentPage*pageSize | sort:sortKey:reverse | filterName:searchValue ">
+          <td class="text-capitalize">
+            {{ item.userName }}
+          </td>
+          <td>{{ item.email }}</td>
+          <td class="text-capitalize">
+            {{ item.designation }}
+          </td>
+          <td>
+            {{ item.number }}
+          </td>
+          <td>{{ item.userType }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ngb-pagination [collectionSize]="user.length" [(page)]="currentPage" [pageSize]="pageSize"></ngb-pagination>
+  </div>
+</div>

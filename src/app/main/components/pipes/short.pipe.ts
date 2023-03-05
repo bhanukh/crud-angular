@@ -1,12 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { orderBy } from "lodash";
 
 @Pipe({
-  name: 'short'
+  name: 'sort'
 })
 export class ShortPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: any[], key: string, reverse: boolean = false): any[] {
+    if (!value || !key) {
+      return value;
+    }
+    return orderBy(value, [key], [reverse ? 'desc' : 'asc']);
   }
 
 }

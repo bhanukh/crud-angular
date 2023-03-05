@@ -20,7 +20,9 @@ body {
 .edit-class-user .ant-modal-content {
   background-color: transparent !important;
 }
-
+.pagination{
+  justify-content:center;
+}
 .edit-class-user .ant-modal-body {
   padding: 0 !important;
   box-shadow: none;
@@ -37,7 +39,17 @@ body {
 .user-table{
   overflow: auto;
 }
-
+@media (max-width: 1440px) {
+  .ant-modal {
+    width: 50% !important;
+  }
+  .custom {
+    width: 40%;
+  }
+  .user-table{
+    width: 100%;
+  }
+}
 @media (max-width: 1024px) {
   .ant-modal {
     width: 50% !important;

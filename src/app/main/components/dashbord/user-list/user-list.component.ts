@@ -30,6 +30,17 @@ export class UserListComponent implements OnInit {
   usertype: any;
   isEdit: boolean = false;
   select: any;
+  
+  currentPage = 1;
+  pageSize = 8;
+  sortKey: string = '';
+  reverse: boolean = false;
+
+  sort(key: string) {
+    this.reverse = (this.sortKey === key) ? !this.reverse : false;
+    this.sortKey = key;
+  }
+  
   constructor(
     private auth: UserdataService,
     private modal: NzModalService,
@@ -53,6 +64,7 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
   }
   showSuccess() {
     this.toaster.success('Selected user deleted successfully', 'Success');
@@ -84,6 +96,11 @@ export class UserListComponent implements OnInit {
     this.isEdit = false;
   }
 
+  getUserList(){
+    
+  }
+
+
   updateAdmin(data: any) {
     this.select = localStorage.getItem('selected');
 
@@ -109,7 +126,9 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteUserDet(userId: string) {
+  deleteUserDet(userId: string)
+   {
+  
     this.modal.confirm({
       nzTitle: 'Are you sure delete this user?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
@@ -118,21 +137,30 @@ export class UserListComponent implements OnInit {
       nzOkDanger: true,
       nzOnOk: (() => {
         this.auth.deleteUser(userId).subscribe((res) => {
+          console.log(res)
+          console.log(userId)
           this.data = this.data.filter((eachData: any) => {
             eachData.userId !== userId;
-          });
+          })
           this.auth.allData().subscribe((resp) => {
             this.user = Object.values(resp);
             let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
             this.user = rep;
+            console.log(this.user)
+            this.showSuccess();
+            this.ngOnInit()
           });
-          this.showSuccess();
-        });
-        ;
-      }),
+          
+        },
+        );
+      }
+      
+      ),
 
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     })
+   
+  
   }
 }
