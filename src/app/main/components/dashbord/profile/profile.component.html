@@ -27,40 +27,49 @@
                     [nzShowUploadList]="false"
                     [nzBeforeUpload]="beforeUpload"
                     (nzChange)="handleChange($event)"
+                    [nzShowButton]="true"
                   >
                     <ng-container *ngIf="!avatarUrl">
-                      <span class="upload-icon" nz-icon
+                      <span class="upload-icon showIcon" nz-icon
                         ><img
                           class="py-5 mt-2 img-user"
                           src="{{ this.currentUser.picture }}"
                           alt=""
-                      /></span>
+                      />
+                      <div class="overlay">
+                        <div class="text"><span nz-icon nzType="upload" nzTheme="outline"></span></div>
+                      </div>
+                    </span>
                     </ng-container>
+                    <div class="showIcon">
                     <img class="py-5 mt-2 img-user"
                       *ngIf="avatarUrl"
                       [src]="avatarUrl"
 
                     />
+
+                  </div>
                   </nz-upload>
                 </div>
 
-                <h5 class="text-capitalize text-white mt-4">
+                <h5 class="text-capitalize text-white mt-1">
                   {{ this.currentUser.userName }}
                 </h5>
                 <p class="fw-bold text-capitalize">
                   {{ this.currentUser.designation }}
                 </p>
-                <div class="mb-3">
-                  <button
-                    nz-button
-                    nzType="primary"
-                    (click)="showModal(currentUser)"
-                  >
-                    Edit
-                  </button>
-                </div>
+
               </div>
               <div class="col-md-7">
+                <div class="edit-btn">
+                  <button
+                    nz-button
+                    nzType="default"
+                    (click)="showModal(currentUser)"
+                  >
+                  <span nz-icon nzType="edit" nzTheme="outline"></span>
+                  </button>
+                </div>
                 <div class="card-body p-4">
                   <h6>Information</h6>
                   <hr class="mt-0 mb-3" />
@@ -83,8 +92,8 @@
                       <h6>UserType</h6>
                       <p class="text-muted">{{ this.currentUser.userType }}</p>
                     </div>
-                    <hr class="mt-0 mb-3" style="width: 88%; margin-left: 9px;" />
-                    <div class="row pt-1">
+                    <!-- <hr class="mt-0 mb-3" style="width: 88%; margin-left: 9px;" /> -->
+                    <!-- <div class="row pt-1">
                       <div class="col-12 mb-1">
                       <h6>About Me</h6>
                       <p class="text-muted" style="font-size: 1rem">
@@ -96,10 +105,10 @@
                         <span class="text-capitalize fw-bold">{{
                           this.currentUser.designation
                         }}</span
-                        >.
+                        >
                       </p>
                     </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>

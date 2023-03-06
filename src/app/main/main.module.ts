@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule,NgForOf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { DashbordComponent } from './components/dashbord/dashbord.component';
 import { LogoutComponent } from './components/dashbord/logout/logout.component';
@@ -12,6 +12,10 @@ import { SharedModule } from '../shared/shared.module';
 import { LoadingSpinerComponent } from '../shared/components/loading-spiner/loading-spiner.component';
 import { ComponentPipe } from './components/pipes/filter-Name.pipe';
 import { ShortPipe } from './components/pipes/short.pipe';
+import { UserTableComponent } from './components/user-table/user-table.component';
+import { DataTablesModule } from 'angular-datatables';
+
+
 
 
 @NgModule({
@@ -26,19 +30,19 @@ import { ShortPipe } from './components/pipes/short.pipe';
     ProfileComponent,
     ComponentPipe,
     ShortPipe,
-
+    UserTableComponent,
   ],
   imports: [
     CommonModule,
-    MainRoutingModule,
     SharedModule,
-   NgForOf
+   MainRoutingModule,
+  DataTablesModule
   ],
   exports:[
     CommonModule,
-    MainRoutingModule,
     SharedModule,
-   NgForOf
+    MainRoutingModule,
+  //DataTablesModule
   ]
 })
 export class MainModule { }

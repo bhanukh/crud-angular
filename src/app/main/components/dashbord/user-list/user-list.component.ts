@@ -6,7 +6,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/service/auth.service';
 import { Location } from '@angular/common';
 
-
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -17,7 +16,6 @@ export class UserListComponent implements OnInit {
     userName: '',
     designation: '',
     number: '',
-
   };
   name = '';
   designation: string = '';
@@ -30,32 +28,31 @@ export class UserListComponent implements OnInit {
   usertype: any;
   isEdit: boolean = false;
   select: any;
-  
+
   currentPage = 1;
   pageSize = 8;
   sortKey: string = '';
   reverse: boolean = false;
 
   sort(key: string) {
-    this.reverse = (this.sortKey === key) ? !this.reverse : false;
+    this.reverse = this.sortKey === key ? !this.reverse : false;
     this.sortKey = key;
   }
-  
+
   constructor(
     private auth: UserdataService,
     private modal: NzModalService,
     private router: Router,
     private toaster: ToastrService,
-    private fireAuth:AuthService,
-    private  location:Location
-
+    private fireAuth: AuthService,
+    private location: Location
   ) {
     this.auth.getData().subscribe((resData) => {
       this.user = Object.values(resData);
 
       this.userData = localStorage.getItem('logInUser');
       this.userData = JSON.parse(this.userData);
-      console.log(this.userData.userType)
+      console.log(this.userData.userType);
       this.usertype = this.userData.userType;
 
       let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
@@ -63,9 +60,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
   showSuccess() {
     this.toaster.success('Selected user deleted successfully', 'Success');
   }
@@ -96,10 +91,14 @@ export class UserListComponent implements OnInit {
     this.isEdit = false;
   }
 
-  getUserList(){
-    
+  getUserList() {
+    this.auth.allData().subscribe((resp) => {
+      this.user = Object.values(resp);
+      let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
+      this.user = rep;
+      console.log(this.user);
+    });
   }
-
 
   updateAdmin(data: any) {
     this.select = localStorage.getItem('selected');
@@ -126,41 +125,35 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteUserDet(userId: string)
-   {
-  
+  deleteUser(userId: string) {
+    console.log(userId);
     this.modal.confirm({
+
       nzTitle: 'Are you sure delete this user?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: (() => {
+      nzOnOk: () => {
         this.auth.deleteUser(userId).subscribe((res) => {
-          console.log(res)
-          console.log(userId)
-          this.data = this.data.filter((eachData: any) => {
-            eachData.userId !== userId;
-          })
-          this.auth.allData().subscribe((resp) => {
+          console.log(res);
+
+          // this.data = this.data.filter((eachData: any) => {
+          //   eachData.userId !== userId;
+          // });
+          this.auth.getData().subscribe((resp) => {
             this.user = Object.values(resp);
             let rep = this.user.filter((u: any) => this.userData.uid !== u.uid);
             this.user = rep;
-            console.log(this.user)
+            console.log(this.user);
             this.showSuccess();
-            this.ngOnInit()
           });
-          
-        },
-        );
-      }
-      
-      ),
+        });
+      },
 
       nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel')
-    })
-   
-  
+      nzOnCancel: () => console.log('Cancel'),
+    });
+
   }
 }

@@ -21,6 +21,7 @@ export class DashbordComponent {
   ) {
     this.data = localStorage.getItem('logInUser');
     this.userData = JSON.parse(this.data);
+    console.log("main module")
   }
 
   ngOnInit() {
