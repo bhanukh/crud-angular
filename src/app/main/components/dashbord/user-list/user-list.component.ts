@@ -5,6 +5,7 @@ import { UserdataService } from 'src/app/service/userdata.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/service/auth.service';
 import { Location } from '@angular/common';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-user-list',
@@ -42,10 +43,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private auth: UserdataService,
     private modal: NzModalService,
-    private router: Router,
     private toaster: ToastrService,
-    private fireAuth: AuthService,
-    private location: Location
+    private notification:NzNotificationService
   ) {
     this.auth.getData().subscribe((resData) => {
       this.user = Object.values(resData);
@@ -65,7 +64,11 @@ export class UserListComponent implements OnInit {
     this.toaster.success('Selected user deleted successfully', 'Success');
   }
   showSuccesEdit() {
-    this.toaster.success('User information updated successfully', 'Success');
+    this.notification.success(
+      'Success',
+      'User details updated successfuly.',
+      { nzDuration: 0 }
+    );
   }
   showModal(item: any) {
     this.isEdit = true;

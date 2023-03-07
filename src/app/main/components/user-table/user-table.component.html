@@ -1,24 +1,29 @@
 <div class="container">
-  <div class="card m-5 p-2">
-    <div class="card-body">
-       <table class="table table-dark table-stripted table-hover">
+  <div class="card m-3">
+    <div class="card-body ">
+       <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigers" class="table table-dark table-stripted table-hover" >
         <thead>
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>UserName</th>
-            <th>Phone</th>
-            <th>Address</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Count</th>
+            <th>Operation</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let emp of empList">
             <td>{{emp.id}}</td>
-            <td>{{emp.name}}</td>
-            <td>{{emp.username}}</td>
-            <td>{{emp.email}}</td>
-            <td>{{emp.address.city}}</td>
-
+            <td>{{emp.title}}</td>
+            <td>{{emp.price}}</td>
+            <td>{{emp.rating.rate}}</td>
+            <td>{{emp.rating.count}}</td>
+          <td>
+            <button nz-button nzType="primary" nzDanger (click)="deleteEmp(emp.id)">
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </td>
           </tr>
         </tbody>
        </table>

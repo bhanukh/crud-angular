@@ -29,6 +29,7 @@ import { AuthService } from '../service/auth.service';
 import { UserdataService } from '../service/userdata.service';
 import { ErrorComponent } from './components/error/error.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 
 
@@ -65,7 +66,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     NzModalModule,
     NzUploadModule,
     NzIconModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NzNotificationModule
 
   ],
   exports:[
@@ -84,7 +86,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     NzModalModule,
     NzUploadModule,
     NzIconModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NzNotificationModule
   ],
   providers: [
     UserdataService,

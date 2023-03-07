@@ -36,13 +36,14 @@ import { DataTablesModule } from 'angular-datatables';
     CommonModule,
     SharedModule,
    MainRoutingModule,
-  DataTablesModule
+  DataTablesModule,
+
   ],
   exports:[
     CommonModule,
     SharedModule,
     MainRoutingModule,
-  //DataTablesModule
+  DataTablesModule
   ]
 })
 export class MainModule { }
