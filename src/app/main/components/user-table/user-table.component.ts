@@ -13,13 +13,11 @@ export class UserTableComponent implements OnInit,OnDestroy {
   dtTrigers: Subject<any>=new Subject<any>();
 
 constructor(private service: DatatableService){
-this.service.users().subscribe((res)=>{
-  this.empList=res
-})
+this.emp()
 }
   ngOnInit(): void {
     this.dtOptions={
-      pagingType:'full_numbers',
+      pagingType:'simple',
     }
   }
   ngOnDestroy(): void {

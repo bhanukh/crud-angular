@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../service/auth.guard';
+import { ChartComponent } from './components/chart/chart.component';
 import { DashbordComponent } from './components/dashbord/dashbord.component';
 import { LogoutComponent } from './components/dashbord/logout/logout.component';
 import { ProfileComponent } from './components/dashbord/profile/profile.component';
@@ -16,7 +17,8 @@ children:[
   { path: 'logout', component: LogoutComponent },
   {path:'dashbord', component:DashbordComponent},
   { path: 'user', component: UserDetailsComponent },
-  {path: 'table', component:UserTableComponent}
+  {path: 'table', component:UserTableComponent},
+  {path: 'chart', component:ChartComponent}
 ],canActivate:[AuthGuard]
 }
 ]

@@ -14,7 +14,8 @@ import { ComponentPipe } from './components/pipes/filter-Name.pipe';
 import { ShortPipe } from './components/pipes/short.pipe';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { DataTablesModule } from 'angular-datatables';
-
+import { ChartComponent } from './components/chart/chart.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -31,13 +32,14 @@ import { DataTablesModule } from 'angular-datatables';
     ComponentPipe,
     ShortPipe,
     UserTableComponent,
+    ChartComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
    MainRoutingModule,
   DataTablesModule,
-
+  HighchartsChartModule
   ],
   exports:[
     CommonModule,
