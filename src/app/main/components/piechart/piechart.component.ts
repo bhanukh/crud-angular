@@ -2,14 +2,16 @@ import { Component , OnInit} from '@angular/core';
 import * as Highcharts from 'highcharts';
 import enableExporting from 'highcharts/modules/exporting';
 
-enableExporting(Highcharts);
 
+enableExporting(Highcharts);
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  selector: 'app-piechart',
+  templateUrl: './piechart.component.html',
+  styleUrls: ['./piechart.component.css']
 })
-export class ChartComponent implements OnInit  {
+export class PiechartComponent implements OnInit {
+
+
   All= {
     current: [
       {
@@ -366,39 +368,39 @@ export class ChartComponent implements OnInit  {
   this.chartOptions.series=[
 
     {
-      type:'line',
+      type:'pie',
       name:'current',
       data:this.currData,
-     },
-    {
-    type:'line',
-    name:'prev',
-    data:this.prevData
-   }]
+     }]
   }
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
   series:[{
-  type:'line',
+  type:'pie',
   name:'current',
   data:this.currData
- },
-{
-  type:'line',
-  name:'prev',
-  data:this.prevData
-}],
+ }],
+ plotOptions: {
+  pie: {
+    allowPointSelect: true,
+    cursor: 'pointer',
+    dataLabels: {
+      enabled: true,
+      format: '<b>{point.index}</b>: {point.percentage:.1f} %'
+    }
+  }
+},
 tooltip:{
   shared:true,
   formatter:function(){
     console.log(this)
-    return this.x +`<br>`+
-    'Current:' + (this.y) + '%'+ `<br>` +
-    'Previus:' + this.x + '%'
+    return this.y +`<br>`+
+    'Current:' + this.percentage + '%'+ `<br>`
   }
 }
 }
 }
+
 
 

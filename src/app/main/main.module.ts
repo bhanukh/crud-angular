@@ -16,6 +16,7 @@ import { UserTableComponent } from './components/user-table/user-table.component
 import { DataTablesModule } from 'angular-datatables';
 import { ChartComponent } from './components/chart/chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { PiechartComponent } from './components/piechart/piechart.component';
 
 
 
@@ -33,6 +34,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     ShortPipe,
     UserTableComponent,
     ChartComponent,
+    PiechartComponent,
   ],
   imports: [
     CommonModule,
