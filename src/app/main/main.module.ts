@@ -17,6 +17,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { ChartComponent } from './components/chart/chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { PiechartComponent } from './components/piechart/piechart.component';
+import { InterchartComponent } from './components/interchart/interchart.component';
+import { PieComponent } from './components/interchart/pie/pie.component';
 
 
 
@@ -35,6 +37,8 @@ import { PiechartComponent } from './components/piechart/piechart.component';
     UserTableComponent,
     ChartComponent,
     PiechartComponent,
+    InterchartComponent,
+    PieComponent,
   ],
   imports: [
     CommonModule,

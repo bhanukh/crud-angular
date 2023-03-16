@@ -7,6 +7,7 @@ import { LogoutComponent } from './components/dashbord/logout/logout.component';
 import { ProfileComponent } from './components/dashbord/profile/profile.component';
 import { UserDetailsComponent } from './components/dashbord/user-details/user-details.component';
 import { UserListComponent } from './components/dashbord/user-list/user-list.component';
+import { InterchartComponent } from './components/interchart/interchart.component';
 import { PiechartComponent } from './components/piechart/piechart.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
 
@@ -21,6 +22,7 @@ children:[
   {path: 'table', component:UserTableComponent},
   {path: 'chart', component:ChartComponent},
   {path: 'pie', component:PiechartComponent},
+  {path: 'combine', component:InterchartComponent},
 
 ],canActivate:[AuthGuard]
 }
