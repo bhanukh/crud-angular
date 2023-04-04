@@ -343,7 +343,7 @@ list:any={}
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     xAxis: {
-      categories: ['3 jan', '6 jan', '9 jan', '12 jan']
+      categories: ['3 jan', '6 jan', '9 jan', '12 jan','16 jan']
     },
     plotOptions: {
       column: {

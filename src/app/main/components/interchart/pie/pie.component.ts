@@ -10,7 +10,8 @@ enableExporting(Highcharts);
   styleUrls: ['./pie.component.css']
 })
 export class PieComponent {
-  All={
+  All=[
+    {
     "credorax": [
         {
             "date": "03",
@@ -272,77 +273,54 @@ export class PieComponent {
         }
     ]
 }
-network:any=[];
-truevo:any=[];
-truevo_bank:any=[];
-credorax:any=[];
-clearhaus:any=[];
-safecharge:any=[];
+]
+data:any={};
+parsedData = {};
+card:any={};
   ngOnInit(): void {
-   this.All.network.forEach((item)=>{
-    this.network.push(item.allTransactions)
-   })
-   this.All.truevo.forEach((item)=>{
-    this.truevo.push(item.allTransactions)
-   })
-   this.All.truevo_bank.forEach((item)=>{
-    this.truevo_bank.push(item.allTransactions)
-   })
-   this.All.credorax.forEach((item)=>{
-    this.credorax.push(item.allTransactions)
-   })
-   this.All.clearhaus.forEach((item)=>{
-    this.clearhaus.push(item.allTransactions)
-   })
-   this.All.safecharge.forEach((item)=>{
-    this.safecharge.push(item.allTransactions)
-   })
-   console.log(this.safecharge)
+    this.All.forEach((item: any) => {
+      this.card=Object.keys(item)
+      console.log(this.card)
+    });
+    this.card.forEach((item:any)=>{
+      this.parsedData = (this.All[0] as any)[item].forEach( (i: any) =>{
+        this.data=[item,i.allTransactions]
+        console.log(this.data);
+      })
+    })
+  //  this.All.network.forEach((item)=>{
+  //   this.network.push(item.allTransactions)
+  //  })
+  //  this.All.truevo.forEach((item)=>{
+  //   this.truevo.push(item.allTransactions)
+  //  })
+  //  this.All.truevo_bank.forEach((item)=>{
+  //   this.truevo_bank.push(item.allTransactions)
+  //  })
+  //  this.All.credorax.forEach((item)=>{
+  //   this.credorax.push(item.allTransactions)
+  //  })
+  //  this.All.clearhaus.forEach((item)=>{
+  //   this.clearhaus.push(item.allTransactions)
+  //  })
+  //  this.All.safecharge.forEach((item)=>{
+  //   this.safecharge.push(item.allTransactions)
+  //  })
    this.chartOptions.series=[{
-    name:'network',
+    name:this.data.item,
     type:'pie',
-    data:this.network,
+    data:this.data,
     selected:true
-   },
-   {
-    name:'truevo',
-    type:'pie',
-    data:this.truevo,
-    selected:true
-   },
-   {
-    name:'truevo_bank',
-    type:'pie',
-    data:this.truevo_bank,
-    selected:true
-   },
-   {
-    name:'clearhaus',
-    type:'pie',
-    data:this.clearhaus,
-    selected:true
-   },
-   {
-    name:'credorax',
-    type:'pie',
-    data:this.credorax,
-    selected:true
-   },
-   {
-    name:'safecharge',
-    type:'pie',
-    data:this.safecharge,
-    selected:true,
-
-   },
-  ]
+   }
+ ]
   }
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     chart: {
       plotBorderWidth: 0,
       plotShadow: false,
-      type: 'pie'
+      type: 'pie',
+      styledMode:true
     },
     title: {
       text: 'Browser market shares in March, 2022',
@@ -361,7 +339,7 @@ safecharge:any=[];
         allowPointSelect: true,
         cursor: 'pointer',
         dataLabels: {
-          enabled: false
+          enabled: true
         },
         showInLegend: true
       }
